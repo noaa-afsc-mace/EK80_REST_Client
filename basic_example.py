@@ -10,10 +10,14 @@ import ek80_rest_client
 class basic_example(QtCore.QObject):
 
     stopClient = QtCore.pyqtSignal()
+    stopApp = QtCore.pyqtSignal()
 
     def __init__(self, server_address, clean_server=False, parent=None):
         #  initialize the superclass
         super(basic_example, self).__init__(parent)
+
+        #  connect the app stop signal to our stop method
+        self.stopApp.connect(self.stop_app)
 
         #  store some important parameters
         self.client = ek80_rest_client.ek80_rest_client(server_address=server_address)
@@ -33,19 +37,35 @@ class basic_example(QtCore.QObject):
 
     def startApp(self):
 
+        #  get the available channels
         self.channels = self.client.get_channels()
-        print(self.channels)
+        print("Available Channels:")
+        for chan in self.channels:
+            print("    " + chan)
 
+        #  query other various application states and display
+        print("Operation Mode:", self.client.get_operation_mode())
+        print("Operation State:", self.client.get_operational_state())
+        print("Ping Interval:", self.client.get_ping_interval())
+        print("Ping Mode:", self.client.get_ping_mode())
+        print("Recording Settings:", self.client.get_recording_settings())
+        print("Recording Depths")
+        for chan in self.channels:
+            print("    " + chan + ":", self.client.get_recording_range(chan))
+
+        #  if there are any channels, subscribe to the first channel's bottom detection data
         if len(self.channels) > 0:
-            id = self.client.create_bottom_detection_subscription(self.channels[0])
-
+            print("Creating bottom depth subscription for channel " + self.channels[0])
+            print("Bottom detection data will be displayed as it is received.")
+            print("Press <ctrl>-C to exit")
+            self.id = self.client.create_bottom_detection_subscription(self.channels[0])
         else:
             print('No channels found. Exiting...')
             QtCore.QCoreApplication.instance().quit()
             return
 
 
-    def stopApp(self):
+    def stop_app(self):
 
         print("Cleaning up the client...")
         self.stopClient.emit()
@@ -63,16 +83,24 @@ class basic_example(QtCore.QObject):
     @QtCore.pyqtSlot(object, str, dict)
     def subscriptionDataAvailable(self, clientObj, data_type, data):
 
-        if data_type == 'bottom_detection':
+        if data_type == 'bottom detection':
             #  print the results
             print(data)
 
 
+    def external_stop(self):
+        '''
+        external_stop is called when one of the main thread exit handlers are called.
+        It emits a stop signal that is then received by the QCoreApplication which then
+        shuts everything down in the QCoreApplication thread.
+        '''
+        self.stopApp.emit()
 
 
-def exitHandler(a,b=None):
+
+def exit_handler(a,b=None):
     '''
-    exitHandler is called when CTRL-c is pressed on Windows
+    exit_handler is called when CTRL-c is pressed on Windows
     '''
     global ctrlc_pressed
 
@@ -80,7 +108,7 @@ def exitHandler(a,b=None):
         #  make sure we only act on the first ctrl-c press
         ctrlc_pressed = True
         print("CTRL-C detected. Shutting down...")
-        example_app.stopApp()
+        console_app.external_stop()
 
     return True
 
@@ -97,7 +125,7 @@ def signal_handler(*args):
         #  make sure we only act on the first ctrl-c press
         ctrlc_pressed = True
         print("CTRL-C or SIGTERM/SIGHUP detected. Shutting down...")
-        example_app.stopApp()
+        console_app.external_stop()
 
     return True
 
@@ -105,10 +133,6 @@ def signal_handler(*args):
 if __name__ == '__main__':
     import sys
     import argparse
-
-    #  define the default EK80 server IP address. If an address is not passed
-    #  on the command line, this address will be used
-    server_address = '192.168.0.131'
 
     #  by default we will not "clean" all of the subscriptions and endpoints
     #  from the server. Normally you wouldn't want or need to do this but during
@@ -123,7 +147,7 @@ if __name__ == '__main__':
     if sys.platform == "win32":
         #  On Windows, we use win32api.SetConsoleCtrlHandler to catch ctrl-c
         import win32api
-        win32api.SetConsoleCtrlHandler(exitHandler, True)
+        win32api.SetConsoleCtrlHandler(exit_handler, True)
     else:
         #  On linux we can use signal to get not only ctrl-c, but
         #  termination and hangup signals also.
@@ -144,8 +168,9 @@ if __name__ == '__main__':
 
     #  create an instance of QCoreApplication and and instance of the our example application
     app = QtCore.QCoreApplication(sys.argv)
-    example_app = basic_example(server_address, clean_server=clean_server,
+    console_app = basic_example(server_address, clean_server=clean_server,
             parent=app)
 
     #  and start the event loop
     sys.exit(app.exec_())
+

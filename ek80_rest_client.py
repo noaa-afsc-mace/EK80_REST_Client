@@ -56,7 +56,6 @@ class ek80_rest_client(QtCore.QObject):
     cleanupComplete = QtCore.pyqtSignal()
 
 
-
     def __init__(self, server_address='localhost', param_server_port=12345,
             data_server_port=12346, name=None, parent=None):
 
@@ -130,6 +129,152 @@ class ek80_rest_client(QtCore.QObject):
         return motion_data
 
 
+    def get_operation_mode(self):
+        """
+        get_operation_mode returns...
+        """
+        sa = ek80_param_client.SystemApi(self.param_api_client)
+        return sa.system_get_operation_mode()
+
+
+    def set_operation_mode(self, mode):
+        '''
+        set_operation_mode sets...
+        '''
+        sa = ek80_param_client.SystemApi(self.param_api_client)
+        sa.system_put_operation_mode(mode)
+
+
+    def get_operational_state(self):
+        """
+        get_operational_state returns...
+        """
+        sa = ek80_param_client.SystemApi(self.param_api_client)
+        return sa.system_get_operational_state()
+
+
+    def get_ping_interval(self):
+        """
+        get_ping_interval returns...
+        """
+        sa = ek80_param_client.SystemApi(self.param_api_client)
+        return sa.system_get_ping_interval()
+
+
+    def set_ping_interval(self, interval):
+        '''
+        set_ping_interval sets...
+        '''
+        sa = ek80_param_client.SystemApi(self.param_api_client)
+        sa.system_put_ping_interval(interval)
+
+
+    def get_ping_mode(self):
+        """
+        get_ping_mode returns...
+        """
+        sa = ek80_param_client.SystemApi(self.param_api_client)
+        return sa.system_get_ping_mode()
+
+
+    def set_ping_mode(self, mode):
+        '''
+        set_ping_mode sets...
+        '''
+        sa = ek80_param_client.SystemApi(self.param_api_client)
+        sa.system_put_ping_mode(mode)
+
+
+    def get_recording_range(self, channel_id):
+        """
+        get_recording_range returns the current recording range for the
+        provided channel. It also returns the state of the channel's auto
+        recording range setting.
+
+        This method only returns meaningful data when individual recording
+        ranges are configured. If the channel recording range is set to
+        Common, calls to this method return a a default IndividualRangeControl
+        object.
+        """
+        dsa = ek80_param_client.DataStorageApi(self.param_api_client)
+        return dsa.data_storage_ek80_get_individual_channel_range(channel_id)
+
+
+    def set_recording_range(self, channel_id, range, auto_range=False):
+        '''
+        set_recording_range sets the recording range for the specified channel.
+        You can set auto_range to True to enable automatic recording range.
+        '''
+        dsa = ek80_param_client.DataStorageApi(self.param_api_client)
+        channel_range = ek80_param_client.IndividualRangeControl(channel_id=channel_id,
+                individual_channel_range=range, individual_channel_auto=auto_range)
+        dsa.data_storage_ek80_set_individual_channel_range(channel_range)
+
+
+    def get_recording_settings(self):
+        """
+        get_recording_settings returns the current Raw data recording settings in
+        a MainStorageSettings object.
+
+        Attribute                   Type
+        file_path                   str
+        raw_file_name_prefix        str
+        max_file_size (bytes)       int
+        min_free_disk_space (bytes) int
+        sample_range (m)            int
+        sample_range_auto           bool
+        individual_range_control    bool
+        record_raw_active           bool
+        sample_data_format_wbt_cw   str
+            sample_data_format_wbt_cw values:
+                'complex'
+                'power-angle'
+                'power-angle-decimated'
+
+        """
+        dsa = ek80_param_client.DataStorageApi(self.param_api_client)
+        return dsa.data_storage_get_basic_storage_settings()
+
+
+    def set_recording_settings(self, path=None, file_prefix=None,
+            max_file_size=None, min_free_disk_space=None, record_range=None,
+            record_range_auto=None, individual_range_control=None,
+            record_active=None, sample_data_format_wbt_cw=None):
+        '''
+        set_recording_settings sets a number of general data recording
+        parameters.
+        '''
+        dsa = ek80_param_client.DataStorageApi(self.param_api_client)
+        storage_settings = ek80_param_client.MainStorageSettings(file_path=path,
+                raw_file_name_prefix=file_prefix,
+                max_file_size=max_file_size,
+                min_free_disk_space=min_free_disk_space,
+                sample_range=record_range,
+                sample_range_auto=record_range_auto,
+                individual_range_control=individual_range_control,
+                record_raw_active=record_active,
+                sample_data_format_wbt_cw=sample_data_format_wbt_cw)
+        dsa.data_storage_set_basic_storage_settings(storage_settings)
+
+
+    def get_recording_state(self):
+        '''
+        get_recording_state returns True if the EK80 software is recording raw
+        data to disk and False if it is not.
+        '''
+        dsa = ek80_param_client.DataStorageApi(self.param_api_client)
+        return dsa.data_storage_get_record_raw_active()
+
+
+    def set_recording_state(self, enabled):
+        '''
+        set_recording_state sets the raw data recording state. True enables
+        recording and False stops it.
+        '''
+        dsa = ek80_param_client.DataStorageApi(self.param_api_client)
+        dsa.data_storage_set_record_raw_active(bool(enabled))
+
+
     def get_drop_keel_offset(self):
         '''
         get_drop_keel_offset returns the current drop keel setting value and a bool
@@ -148,6 +293,30 @@ class ek80_rest_client(QtCore.QObject):
         dropkeel_settings = ek80_param_client.ManualSetting(current_value=new_offset,
                 is_manual=True)
         osa.ownship_set_drop_keel_offset(dropkeel_settings)
+
+
+    def get_ping_configuration(self):
+        '''
+        get_ping_configuration returns...
+        '''
+        pca = ek80_param_client.PingConfigurationApi(self.param_api_client)
+        return pca.ping_ek80_configuration_get_ping_configuration()
+
+
+    def get_channel_transmit_power(self, channel_id):
+        '''
+        get_channel_transmit_power returns...
+        '''
+        pca = ek80_param_client.PingConfigurationApi(self.param_api_client)
+        return pca.ping_configuration_get_channel_transmit_power(channel_id)
+
+
+    def get_channel_pulse_settings(self, channel_id):
+        '''
+        get_channel_pulse_settings returns...
+        '''
+        pca = ek80_param_client.PingConfigurationApi(self.param_api_client)
+        return pca.ping_configuration_get_channel_pulse_settings(channel_id)
 
 
     def delete_bottom_detection_subscription(self, sub_id, endpoint_id=None,
