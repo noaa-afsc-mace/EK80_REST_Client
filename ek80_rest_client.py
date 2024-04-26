@@ -32,7 +32,6 @@
 """
 
 
-import uuid
 import datetime
 import zmq
 import numpy as np
@@ -56,17 +55,15 @@ class ek80_rest_client(QtCore.QObject):
     cleanupComplete = QtCore.pyqtSignal()
 
 
-    def __init__(self, server_address='localhost', param_server_port=12345,
-            data_server_port=12346, name=None, parent=None):
+    def __init__(self, name, server_address='localhost', param_server_port=12345,
+            data_server_port=12346, parent=None):
 
         super(ek80_rest_client, self).__init__(parent)
 
-        #  clients must have unique names. If you do not provide one, a
-        #  unique UUID will be generated.
-        if name:
-            self.name = str(name)
-        else:
-            self.name = str(uuid.uuid1())
+        #  clients must have unique names. Client names are used in creating endpoints
+        #  and this name will be used to manage these endpoints and their subscriptions.
+        #  If this name is NOT unique,
+        self.name = str(name)
 
         #  initialize some attributes
         self.endpoints = {}
@@ -677,15 +674,26 @@ class ek80_rest_client(QtCore.QObject):
             self.cleanupComplete.emit()
 
 
-    def cleanup_server(self):
+    def cleanup_server(self, clean_all=False):
         '''
-        cleanup_server removes ALL subscriptions and endpoints on a server.
-        A properly working client application should clean up after itself
-        and you should never need to call this method. But during development
-        it is common for your application to crash, leaving subscriptions
-        and endpoints strewn about the server like so much flotsam on the
-        beach. You can call this method before making any subscriptions to
-        clean these up.
+        cleanup_server removes subscriptions and endpoints associated with
+        this instance of the EK80 client from the EK80 server.
+
+        A properly working client application should call cleanup_client()
+        and clean up after itself so you normally shouldn't need to call this
+        method. But during development it is common for your application to
+        crash, leaving subscriptions and endpoints strewn about the server.
+        You can call this method before making any subscriptions to clean
+        these up.
+
+        Args:
+            clean_all (bool): Set this to True to remove ALL subscriptions
+                    and endpoints from the EK80 server. This should be used
+                    with caution when running more than one rest client
+                    application since this would kill subscriptions for those
+                    other apps.
+
+                Default: False
 
         Returns:
             None
@@ -706,6 +714,13 @@ class ek80_rest_client(QtCore.QObject):
         for endpoint in endpoints:
             #  get the endpoint id
             endpoint_id = endpoint.communication_end_point_id
+
+            #  check if we're cleaning up endpoints by name
+            if not clean_all:
+                #  we are, check if our name is in this endpoint's name
+                if self.name not in endpoint.name:
+                    #  it is not, skip
+                    continue
 
             #  get a list of subs associated with this endpoint
             subscriptions = api_instance.get_subscriptions_by_end_point(endpoint_id)
