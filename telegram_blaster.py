@@ -41,13 +41,12 @@ class telegram_blaster(QtCore.QObject):
     #  specify the number of datagrams to send before disconnecting in test mode
     TEST_DATAGRAMS_LIMIT = 10
 
-    def __init__(self, config_file, clean_server=False, test_run=False, parent=None):
+    def __init__(self, config_file, test_run=False, parent=None):
         #  initialize the superclass
         super(telegram_blaster, self).__init__(parent)
 
         #  store our command line args
         self.config_file = config_file
-        self.clean_server = clean_server
         self.test_run = test_run
 
         #  define some initial properties
@@ -140,23 +139,25 @@ class telegram_blaster(QtCore.QObject):
         self.param_timer.setInterval(self.configuration['application']['polled_param_interval_ms'])
 
         #  create an instance of the client and connect some signals
-        self.logger.debug("Connecting to EK80 server at %s." %
-                self.configuration['application']['ek80_server_ip'])
-        self.client = ek80_rest_client.ek80_rest_client(server_address=
-                self.configuration['application']['ek80_server_ip'])
+
+
+
+
+        self.client = ek80_rest_client.ek80_rest_client(
+                self.configuration['application']['ek80_client_id'],
+                server_address= self.configuration['application']['ek80_server_ip'])
         self.client.subscriptionData.connect(self.subscription_data_available)
         self.client.cleanupComplete.connect(self.client_stopped)
         self.stopClient.connect(self.client.cleanup_client)
 
-        #  check if we need to wipe all of the subscriptions (and endpoints)
-        #  from the server. This is sometimes needed while developing client
-        #  apps after they crash and leave their bits around on the server.
-        if self.clean_server:
-            self.logger.debug("Removing and cleaning up all connections on the server. (-c==True)")
-            try:
-                self.client.cleanup_server()
-            except:
-                self.logger.debug("Error cleaning up server?!?")
+        #  clean up any old subs/endpoints associated with this ek80 client name
+        self.logger.debug("Connecting to EK80 server at %s." %
+                self.configuration['application']['ek80_server_ip'])
+        self.logger.debug("Removing any old subs/endpoints from the server")
+        try:
+            self.client.cleanup_server()
+        except Exception as e:
+            self.logger.error("Unable to connect to EK80. Error: %s." % str(e))
 
         #  create our subscriptions
         try:
@@ -344,9 +345,7 @@ class telegram_blaster(QtCore.QObject):
 
             #  the get_navigation call succeeded so the server is available. We
             #  will clean up all connections to ensure that we can connect without
-            #  issue. This is brute force and will break the connections of other
-            #  REST clients so this will need to be rethought if we're running
-            #  multiple REST clients.
+            #  issue.
             self.logger.info("Connected. Cleaning up old subscriptions...")
             self.client.cleanup_client(quiet=True)
 
@@ -692,12 +691,6 @@ if __name__ == '__main__':
     #  define the default config file - a config file is required
     config_file = './telegram_blaster.yml'
 
-    #  by default we will not "clean" all of the subscriptions and endpoints
-    #  from the server. Normally you wouldn't want or need to do this but during
-    #  application development your application may crash and not clean up
-    #  after itself. When this happens, you will not be able to
-    clean_server = False
-
     #  create a state variable to track if the user typed ctrl-c to exit
     ctrlc_pressed = False
 
@@ -720,15 +713,12 @@ if __name__ == '__main__':
     #  parse the command line arguments
     parser = argparse.ArgumentParser(description='telegram_blaster uses the EK80 REST client to subscribe to ' +
             'data channels and broadcast EK500 style telegrams on the network.')
-    parser.add_argument("-c", "--clean", help="Set to True to remove all server subscriptions before running.")
     parser.add_argument("-f", "--config_file", help="Specify the path to the yml configuration file.")
     parser.add_argument("-t", "--test_run", help="Set to True to emit a limited number of telegrams and exit." +
             " This is useful when running in an IDE where exiting using ctrl-c doesn't work.")
 
     args = parser.parse_args()
 
-    if (args.clean):
-        clean_server = True
     if (args.test_run):
         test_run = True
     if (args.config_file):
@@ -736,8 +726,7 @@ if __name__ == '__main__':
 
     #  create an instance of QCoreApplication and and instance of the our example application
     app = QtCore.QCoreApplication(sys.argv)
-    console_app = telegram_blaster(config_file, clean_server=clean_server, test_run=test_run,
-            parent=app)
+    console_app = telegram_blaster(config_file, test_run=test_run, parent=app)
 
     #  and start the event loop
     sys.exit(app.exec_())

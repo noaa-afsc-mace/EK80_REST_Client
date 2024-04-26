@@ -12,6 +12,10 @@ application:
     #ek80_server_ip: 127.0.0.1
     ek80_server_ip: 192.168.117.37
 
+    #  specify a unique name for this application instance. Each client
+    #  connection must have a unique name.
+    ek80_client_id: Blaster_1
+
     #  specify the IP address of the local interface used to transmit
     #  the datagrams. The client IPs defined below must be accessible
     #  from this interface.

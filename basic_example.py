@@ -12,30 +12,32 @@ class basic_example(QtCore.QObject):
     stopClient = QtCore.pyqtSignal()
     stopApp = QtCore.pyqtSignal()
 
-    def __init__(self, server_address, clean_server=False, parent=None):
+    def __init__(self, server_address, client_name, parent=None):
         #  initialize the superclass
         super(basic_example, self).__init__(parent)
 
         #  connect the app stop signal to our stop method
         self.stopApp.connect(self.stop_app)
 
-        #  store some important parameters
-        self.client = ek80_rest_client.ek80_rest_client(server_address=server_address)
+        #  create an instance of the EK80 rest client and connect its signals
+        self.client = ek80_rest_client.ek80_rest_client(client_name,
+                server_address=server_address)
         self.client.subscriptionData.connect(self.subscriptionDataAvailable)
         self.client.cleanupComplete.connect(self.clientStopped)
         self.stopClient.connect(self.client.cleanup_client)
 
-        #  check if we need to wipe all of the subscriptions (and endpoints)
-        #  from the server. This is sometimes needed while developing client
-        #  apps after they crash and leave their bits around on the server.
-        if clean_server:
-            self.client.cleanup_server()
 
         #  get this started...
         QtCore.QTimer.singleShot(0, self.startApp)
 
 
     def startApp(self):
+
+        #  clean up any existing subs/endpoints associated with this client name
+        #  Normally these will be cleaned up by the client application but they
+        #  can be orphaned on the server if this application crashes or is killed
+        #  before it cleans up.
+        self.client.cleanup_server()
 
         #  get the available channels
         self.channels = self.client.get_channels()
@@ -134,11 +136,12 @@ if __name__ == '__main__':
     import sys
     import argparse
 
-    #  by default we will not "clean" all of the subscriptions and endpoints
-    #  from the server. Normally you wouldn't want or need to do this but during
-    #  application development your application may crash and not clean up
-    #  after itself. When this happens, you will not be able to
-    clean_server = False
+    #  Each instance of the EK80 rest client must have a unique name. Here
+    #  we define it for this application. This name should be unique amongst
+    #  all active REST API applications, and it should not change between
+    #  application runs. This name is used to clean up orphaned subscriptions
+    #  from the server after an application exits uncleanly.
+    client_name = "basic_example_app"
 
     #  create a state variable to track if the user typed ctrl-c to exit
     ctrlc_pressed = False
@@ -159,17 +162,13 @@ if __name__ == '__main__':
     #  parse the command line arguments
     parser = argparse.ArgumentParser(description='Example showing a simple usage of the ek80 REST client.')
     parser.add_argument("-s", "--server", help="Specify the EK80 server IP")
-    parser.add_argument("-c", "--clean", help="Set to True to remove all server subscriptions before running.")
     args = parser.parse_args()
     if (args.server):
         server_address = str(args.server)
-    if (args.clean):
-        clean_server = True
 
     #  create an instance of QCoreApplication and and instance of the our example application
     app = QtCore.QCoreApplication(sys.argv)
-    console_app = basic_example(server_address, clean_server=clean_server,
-            parent=app)
+    console_app = basic_example(server_address, client_name, parent=app)
 
     #  and start the event loop
     sys.exit(app.exec_())
