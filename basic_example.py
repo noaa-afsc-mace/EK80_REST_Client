@@ -3,7 +3,7 @@
 
 """
 
-from PyQt5 import QtCore
+from PyQt6 import QtCore
 import ek80_rest_client
 
 
@@ -89,6 +89,9 @@ class basic_example(QtCore.QObject):
             #  print the results
             print(data)
 
+            #  print out the GPS info for fun
+            print(self.client.get_navigation())
+
 
     def external_stop(self):
         '''
@@ -171,5 +174,5 @@ if __name__ == '__main__':
     console_app = basic_example(server_address, client_name, parent=app)
 
     #  and start the event loop
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 

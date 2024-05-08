@@ -39,7 +39,8 @@ import ek80_data_client
 import ek80_param_client
 from google.protobuf.json_format import MessageToDict
 import ek80_datagrams_v2360_pb2 as ek80_datagrams_pb2
-from PyQt5 import QtCore
+#from PyQt5 import QtCore
+from PyQt6 import QtCore
 
 
 class ek80_rest_client(QtCore.QObject):
@@ -115,7 +116,7 @@ class ek80_rest_client(QtCore.QObject):
 
     def get_motion(self):
         """
-        get_motion returns heave, pitch, roll, surge, sway, time, and yaw
+        get_motion returns heave, pitch, roll, surge, sway, time, and yaw (heading)
         """
         osa = ek80_param_client.OwnshipApi(self.param_api_client)
         motion_data = osa.ownship_get_motion()
@@ -979,17 +980,21 @@ class ek80_rest_client(QtCore.QObject):
                     'echogram_min_pixel_value':sub_spec.settings.echogram_min_pixel_value,
                     'echogram_transducer_depth':sub_spec.settings.echogram_transducer_depth,
                     'echogram_delay':sub_spec.settings.echogram_delay,
+                    'echogram_temporal_average': sub_spec.settings.echogram_temporal_average,
+                    'echogram_stop_at_bottom' : sub_spec.settings.echogram_stop_at_bottom,
+                    'echogram_bottom_margin' : sub_spec.settings.echogram_bottom_margin
                    }
 
         return settings
 
 
     def update_echogram_subscription(self, sub_id, pixel_count=500,
-            range=100, range_start=-50, tvg_function=20, bottom_gain=0,
+            range=100, range_start=0, tvg_function=20, bottom_gain=0,
             tvg_type='sv', bottom_tvg_type='none', echogram_type='surface',
             compression_type='mean', expansion_type='interpolate', echogram_heave=1,
             echogram_ping_filter_state=0, echogram_min_pixel_value=-100,
-            echogram_transducer_depth=1, echogram_delay=1):
+            echogram_transducer_depth=1, echogram_delay=1, echogram_temporal_average=-1,
+            echogram_stop_at_bottom=False, echogram_bottom_margin=0.5):
         '''
 
         Args:
@@ -1000,7 +1005,7 @@ class ek80_rest_client(QtCore.QObject):
             range (TYPE):
                 Optional; DESCRIPTION Defaults to 100.
             range_start (TYPE):
-                Optional; DESCRIPTION Defaults to -50.
+                Optional; DESCRIPTION Defaults to 0.
             tvg_function (TYPE):
                 Optional; DESCRIPTION Defaults to 20.
             bottom_gain (TYPE):
@@ -1060,6 +1065,9 @@ class ek80_rest_client(QtCore.QObject):
         sub_settings.echogram_min_pixel_value = echogram_min_pixel_value
         sub_settings.echogram_transducer_depth = echogram_transducer_depth
         sub_settings.echogram_delay = echogram_delay
+        sub_settings.echogram_temporal_average = echogram_temporal_average
+        sub_settings.echogram_stop_at_bottom = echogram_stop_at_bottom
+        sub_settings.echogram_bottom_margin = echogram_bottom_margin
 
         #  create an instance of the echogram subs api
         api_instance = ek80_data_client.EchogramSubscriptionsApi(self.data_api_client)
@@ -1074,7 +1082,8 @@ class ek80_rest_client(QtCore.QObject):
             compression_type='mean', expansion_type='interpolate', echogram_heave=1,
             echogram_ping_filter_state=0, echogram_min_pixel_value=-100,
             echogram_transducer_depth=1,echogram_delay=1, name=None,
-            endpoint_id=None, ek500_db_format=False):
+            endpoint_id=None, ek500_db_format=False, echogram_temporal_average=-1,
+            echogram_stop_at_bottom=False, echogram_bottom_margin=0.5):
         '''
 
         Args:
@@ -1158,6 +1167,9 @@ class ek80_rest_client(QtCore.QObject):
         sub_settings.echogram_min_pixel_value = echogram_min_pixel_value
         sub_settings.echogram_transducer_depth = echogram_transducer_depth
         sub_settings.echogram_delay = echogram_delay
+        sub_settings.echogram_temporal_average = echogram_temporal_average
+        sub_settings.echogram_stop_at_bottom = echogram_stop_at_bottom
+        sub_settings.echogram_bottom_margin = echogram_bottom_margin
 
         #  the echogram sub spec requires that the optional init args be specified.
         #  This is different from the bottom subscription. ?

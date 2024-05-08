@@ -139,10 +139,6 @@ class telegram_blaster(QtCore.QObject):
         self.param_timer.setInterval(self.configuration['application']['polled_param_interval_ms'])
 
         #  create an instance of the client and connect some signals
-
-
-
-
         self.client = ek80_rest_client.ek80_rest_client(
                 self.configuration['application']['ek80_client_id'],
                 server_address= self.configuration['application']['ek80_server_ip'])
@@ -161,7 +157,7 @@ class telegram_blaster(QtCore.QObject):
 
         #  create our subscriptions
         try:
-            self.create_subscritions()
+            self.create_subscriptions()
         except urllib3.exceptions.MaxRetryError:
             #  we couldn't connect to the server so start retrying
             self.retry_timer.start()
@@ -174,7 +170,7 @@ class telegram_blaster(QtCore.QObject):
         self.param_timer.start()
 
 
-    def create_subscritions(self):
+    def create_subscriptions(self):
 
         #  get the list of channels
         self.logger.info("Getting channel information from EK80 server...")
