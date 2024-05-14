@@ -57,7 +57,7 @@ class ek80_rest_client(QtCore.QObject):
 
 
     def __init__(self, name, server_address='localhost', param_server_port=12345,
-            data_server_port=12346, parent=None):
+            data_server_port=12346, end_point_port=24240, parent=None):
 
         super(ek80_rest_client, self).__init__(parent)
 
@@ -70,7 +70,7 @@ class ek80_rest_client(QtCore.QObject):
         self.endpoints = {}
         self.subscriptions = {}
         self.n_subscriptions = 0
-        self.next_server_port = 24240
+        self.next_server_port = end_point_port
         self.server_address = server_address
 
         #  THIS IS A HACK - It appears that the URLACLs created when the EK80 Web API
@@ -103,6 +103,40 @@ class ek80_rest_client(QtCore.QObject):
         '''
         pca = ek80_param_client.PingConfigurationApi(self.param_api_client)
         return pca.ping_configuration_get_channels()
+
+
+    def get_water_column_environment(self):
+        '''
+        get_water_column_environment returns a dictionary containing the water column
+        environment data.
+
+            acidity	                                    float
+            depth_for_sv_and_absorption_calculations	float
+            latitude_for_pressure_calculations	        float
+            salinity	                                float
+            water_temperature	                        float
+            water_column_sound_speed_source	            str
+            water_column_sound_speed	                float
+            selected_profile	                        str
+
+
+        '''
+
+        ea = ek80_param_client.EnvironmentApi(self.param_api_client)
+        return ea.environment_get_water_column_data()
+
+
+    def get_transducer_face_environment(self):
+        '''
+        get_transducer_face_environment returns a dictionary containing the trasducer face
+        environment data.
+
+            transducer_sound_speed_source	            str
+            transducer_manual_sound_speed	            float
+        '''
+
+        ea = ek80_param_client.EnvironmentApi(self.param_api_client)
+        return ea.environment_get_transducer_face_data()
 
 
     def get_navigation(self):

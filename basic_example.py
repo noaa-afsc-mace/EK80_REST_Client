@@ -12,7 +12,7 @@ class basic_example(QtCore.QObject):
     stopClient = QtCore.pyqtSignal()
     stopApp = QtCore.pyqtSignal()
 
-    def __init__(self, server_address, client_name, parent=None):
+    def __init__(self, server_address, client_name, end_point_port, parent=None):
         #  initialize the superclass
         super(basic_example, self).__init__(parent)
 
@@ -21,7 +21,7 @@ class basic_example(QtCore.QObject):
 
         #  create an instance of the EK80 rest client and connect its signals
         self.client = ek80_rest_client.ek80_rest_client(client_name,
-                server_address=server_address)
+                server_address=server_address, end_point_port=end_point_port)
         self.client.subscriptionData.connect(self.subscriptionDataAvailable)
         self.client.cleanupComplete.connect(self.clientStopped)
         self.stopClient.connect(self.client.cleanup_client)
@@ -145,6 +145,7 @@ if __name__ == '__main__':
     #  application runs. This name is used to clean up orphaned subscriptions
     #  from the server after an application exits uncleanly.
     client_name = "basic_example_app"
+    end_point_port = 23412
 
     #  create a state variable to track if the user typed ctrl-c to exit
     ctrlc_pressed = False
@@ -171,7 +172,7 @@ if __name__ == '__main__':
 
     #  create an instance of QCoreApplication and and instance of the our example application
     app = QtCore.QCoreApplication(sys.argv)
-    console_app = basic_example(server_address, client_name, parent=app)
+    console_app = basic_example(server_address, client_name, end_point_port, parent=app)
 
     #  and start the event loop
     sys.exit(app.exec())
