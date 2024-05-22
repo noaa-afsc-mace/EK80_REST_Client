@@ -32,6 +32,10 @@
 """
 
 
+'''
+http://192.168.56.5:45123/swagger/
+'''
+
 import datetime
 import zmq
 import numpy as np
@@ -110,14 +114,14 @@ class ek80_rest_client(QtCore.QObject):
         get_water_column_environment returns a dictionary containing the water column
         environment data.
 
-            acidity	                                    float
-            depth_for_sv_and_absorption_calculations	float
-            latitude_for_pressure_calculations	        float
-            salinity	                                float
-            water_temperature	                        float
-            water_column_sound_speed_source	            str
-            water_column_sound_speed	                float
-            selected_profile	                        str
+            acidity                                     float
+            depth_for_sv_and_absorption_calculations    float
+            latitude_for_pressure_calculations          float
+            salinity                                    float
+            water_temperature                           float
+            water_column_sound_speed_source             str
+            water_column_sound_speed                    float
+            selected_profile                            str
 
 
         '''
@@ -131,8 +135,8 @@ class ek80_rest_client(QtCore.QObject):
         get_transducer_face_environment returns a dictionary containing the trasducer face
         environment data.
 
-            transducer_sound_speed_source	            str
-            transducer_manual_sound_speed	            float
+            transducer_sound_speed_source               str
+            transducer_manual_sound_speed               float
         '''
 
         ea = ek80_param_client.EnvironmentApi(self.param_api_client)
@@ -265,7 +269,15 @@ class ek80_rest_client(QtCore.QObject):
 
         """
         dsa = ek80_param_client.DataStorageApi(self.param_api_client)
-        return dsa.data_storage_get_basic_storage_settings()
+        record_settings = dsa.data_storage_get_basic_storage_settings()
+
+        #  as of EK80 23.6.2 the data_storage_get_basic_storage_settings() call always returns
+        #  True for record_raw_active regardless of the record button state. But, the
+        #  data_storage_get_record_raw_active() returns the correct state so we use
+        #  that call to correct the value returned from data_storage_get_basic_storage_settings()
+        record_settings.record_raw_active = dsa.data_storage_get_record_raw_active()
+
+        return record_settings
 
 
     def set_recording_settings(self, path=None, file_prefix=None,
@@ -277,6 +289,40 @@ class ek80_rest_client(QtCore.QObject):
         parameters.
         '''
         dsa = ek80_param_client.DataStorageApi(self.param_api_client)
+
+        #  while the EK80 REST API docs say that all arguments to MainStorageSettings
+        #  are optional, they are not really that optional. If you fail to provide an
+        #  option, None is passed and EK80 reverts to a default value for that parameter.
+        #  This happens at the MainStorageSettings class also so passing None here isn't
+        #  the problem. This issue probably exists across the library and so we need to
+        #  identify where this is an issue and provide a workaround such that the user
+        #  doesn't need to provide all parameters at every call.
+
+
+        #  in light of the above, we will get the current settings
+        current_settings = self.get_recording_settings()
+
+        #  populate any omitted args with the current active values
+        if path is None:
+            path = current_settings.file_path
+        if file_prefix is None:
+            file_prefix = current_settings.raw_file_name_prefix
+        if max_file_size is None:
+            max_file_size = current_settings.max_file_size
+        if min_free_disk_space is None:
+            min_free_disk_space = current_settings.min_free_disk_space
+        if record_range is None:
+            record_range = current_settings.sample_range
+        if record_range_auto is None:
+            record_range_auto = current_settings.sample_range_auto
+        if individual_range_control is None:
+            individual_range_control = current_settings.individual_range_control
+        if record_active is None:
+            record_active = current_settings.record_raw_active
+        if sample_data_format_wbt_cw is None:
+            sample_data_format_wbt_cw = current_settings.sample_data_format_wbt_cw
+
+        #  create a storage settings object that is fully populated
         storage_settings = ek80_param_client.MainStorageSettings(file_path=path,
                 raw_file_name_prefix=file_prefix,
                 max_file_size=max_file_size,
