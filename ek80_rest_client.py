@@ -61,7 +61,8 @@ class ek80_rest_client(QtCore.QObject):
 
 
     def __init__(self, name, server_address='localhost', param_server_port=12345,
-            data_server_port=12346, end_point_port=24240, parent=None):
+            data_server_port=12346, end_point_port=24240, request_timeout=5,
+            parent=None):
 
         super(ek80_rest_client, self).__init__(parent)
 
@@ -76,6 +77,7 @@ class ek80_rest_client(QtCore.QObject):
         self.n_subscriptions = 0
         self.next_server_port = end_point_port
         self.server_address = server_address
+        self.request_timeout = request_timeout
 
         #  THIS IS A HACK - It appears that the URLACLs created when the EK80 Web API
         #  is configured for localhost literally have "localhost" as the host name and thus the
@@ -106,7 +108,7 @@ class ek80_rest_client(QtCore.QObject):
         get_channels returns a list containing the installed echosounder channels
         '''
         pca = ek80_param_client.PingConfigurationApi(self.param_api_client)
-        return pca.ping_configuration_get_channels()
+        return pca.ping_configuration_get_channels(_request_timeout=self.request_timeout)
 
 
     def get_water_column_environment(self):
@@ -127,12 +129,12 @@ class ek80_rest_client(QtCore.QObject):
         '''
 
         ea = ek80_param_client.EnvironmentApi(self.param_api_client)
-        return ea.environment_get_water_column_data()
+        return ea.environment_get_water_column_data(_request_timeout=self.request_timeout)
 
 
     def get_transducer_face_environment(self):
         '''
-        get_transducer_face_environment returns a dictionary containing the trasducer face
+        get_transducer_face_environment returns a dictionary containing the transducer face
         environment data.
 
             transducer_sound_speed_source               str
@@ -140,7 +142,7 @@ class ek80_rest_client(QtCore.QObject):
         '''
 
         ea = ek80_param_client.EnvironmentApi(self.param_api_client)
-        return ea.environment_get_transducer_face_data()
+        return ea.environment_get_transducer_face_data(_request_timeout=self.request_timeout)
 
 
     def get_navigation(self):
@@ -149,7 +151,7 @@ class ek80_rest_client(QtCore.QObject):
         '''
 
         osa = ek80_param_client.OwnshipApi(self.param_api_client)
-        return osa.ownship_get_navigation()
+        return osa.ownship_get_navigation(_request_timeout=self.request_timeout)
 
 
     def get_motion(self):
@@ -157,7 +159,7 @@ class ek80_rest_client(QtCore.QObject):
         get_motion returns heave, pitch, roll, surge, sway, time, and yaw (heading)
         """
         osa = ek80_param_client.OwnshipApi(self.param_api_client)
-        motion_data = osa.ownship_get_motion()
+        motion_data = osa.ownship_get_motion(_request_timeout=self.request_timeout)
 
         #convert the ping_time to a datetime
         motion_data.time = self.convert_nt_time(motion_data.time)
@@ -170,7 +172,7 @@ class ek80_rest_client(QtCore.QObject):
         get_operation_mode returns...
         """
         sa = ek80_param_client.SystemApi(self.param_api_client)
-        return sa.system_get_operation_mode()
+        return sa.system_get_operation_mode(_request_timeout=self.request_timeout)
 
 
     def set_operation_mode(self, mode):
@@ -178,7 +180,7 @@ class ek80_rest_client(QtCore.QObject):
         set_operation_mode sets...
         '''
         sa = ek80_param_client.SystemApi(self.param_api_client)
-        sa.system_put_operation_mode(mode)
+        sa.system_put_operation_mode(mode, _request_timeout=self.request_timeout)
 
 
     def get_operational_state(self):
@@ -186,7 +188,7 @@ class ek80_rest_client(QtCore.QObject):
         get_operational_state returns...
         """
         sa = ek80_param_client.SystemApi(self.param_api_client)
-        return sa.system_get_operational_state()
+        return sa.system_get_operational_state(_request_timeout=self.request_timeout)
 
 
     def get_ping_interval(self):
@@ -194,7 +196,7 @@ class ek80_rest_client(QtCore.QObject):
         get_ping_interval returns...
         """
         sa = ek80_param_client.SystemApi(self.param_api_client)
-        return sa.system_get_ping_interval()
+        return sa.system_get_ping_interval(_request_timeout=self.request_timeout)
 
 
     def set_ping_interval(self, interval):
@@ -202,7 +204,7 @@ class ek80_rest_client(QtCore.QObject):
         set_ping_interval sets...
         '''
         sa = ek80_param_client.SystemApi(self.param_api_client)
-        sa.system_put_ping_interval(interval)
+        sa.system_put_ping_interval(interval, _request_timeout=self.request_timeout)
 
 
     def get_ping_mode(self):
@@ -210,7 +212,7 @@ class ek80_rest_client(QtCore.QObject):
         get_ping_mode returns...
         """
         sa = ek80_param_client.SystemApi(self.param_api_client)
-        return sa.system_get_ping_mode()
+        return sa.system_get_ping_mode(_request_timeout=self.request_timeout)
 
 
     def set_ping_mode(self, mode):
@@ -218,7 +220,7 @@ class ek80_rest_client(QtCore.QObject):
         set_ping_mode sets...
         '''
         sa = ek80_param_client.SystemApi(self.param_api_client)
-        sa.system_put_ping_mode(mode)
+        sa.system_put_ping_mode(mode, _request_timeout=self.request_timeout)
 
 
     def get_recording_range(self, channel_id):
@@ -233,7 +235,8 @@ class ek80_rest_client(QtCore.QObject):
         object.
         """
         dsa = ek80_param_client.DataStorageApi(self.param_api_client)
-        return dsa.data_storage_ek80_get_individual_channel_range(channel_id)
+        return dsa.data_storage_ek80_get_individual_channel_range(channel_id,
+                _request_timeout=self.request_timeout)
 
 
     def set_recording_range(self, channel_id, range, auto_range=False):
@@ -244,7 +247,8 @@ class ek80_rest_client(QtCore.QObject):
         dsa = ek80_param_client.DataStorageApi(self.param_api_client)
         channel_range = ek80_param_client.IndividualRangeControl(channel_id=channel_id,
                 individual_channel_range=range, individual_channel_auto=auto_range)
-        dsa.data_storage_ek80_set_individual_channel_range(channel_range)
+        dsa.data_storage_ek80_set_individual_channel_range(channel_range,
+                _request_timeout=self.request_timeout)
 
 
     def get_recording_settings(self):
@@ -269,13 +273,13 @@ class ek80_rest_client(QtCore.QObject):
 
         """
         dsa = ek80_param_client.DataStorageApi(self.param_api_client)
-        record_settings = dsa.data_storage_get_basic_storage_settings()
+        record_settings = dsa.data_storage_get_basic_storage_settings(_request_timeout=self.request_timeout)
 
         #  as of EK80 23.6.2 the data_storage_get_basic_storage_settings() call always returns
         #  True for record_raw_active regardless of the record button state. But, the
         #  data_storage_get_record_raw_active() returns the correct state so we use
         #  that call to correct the value returned from data_storage_get_basic_storage_settings()
-        record_settings.record_raw_active = dsa.data_storage_get_record_raw_active()
+        record_settings.record_raw_active = dsa.data_storage_get_record_raw_active(_request_timeout=self.request_timeout)
 
         return record_settings
 
@@ -332,7 +336,8 @@ class ek80_rest_client(QtCore.QObject):
                 individual_range_control=individual_range_control,
                 record_raw_active=record_active,
                 sample_data_format_wbt_cw=sample_data_format_wbt_cw)
-        dsa.data_storage_set_basic_storage_settings(storage_settings)
+        dsa.data_storage_set_basic_storage_settings(storage_settings,
+                _request_timeout=self.request_timeout)
 
 
     def get_recording_state(self):
@@ -341,7 +346,7 @@ class ek80_rest_client(QtCore.QObject):
         data to disk and False if it is not.
         '''
         dsa = ek80_param_client.DataStorageApi(self.param_api_client)
-        return dsa.data_storage_get_record_raw_active()
+        return dsa.data_storage_get_record_raw_active(_request_timeout=self.request_timeout)
 
 
     def set_recording_state(self, enabled):
@@ -350,7 +355,7 @@ class ek80_rest_client(QtCore.QObject):
         recording and False stops it.
         '''
         dsa = ek80_param_client.DataStorageApi(self.param_api_client)
-        dsa.data_storage_set_record_raw_active(bool(enabled))
+        dsa.data_storage_set_record_raw_active(bool(enabled), _request_timeout=self.request_timeout)
 
 
     def get_drop_keel_offset(self):
@@ -359,7 +364,7 @@ class ek80_rest_client(QtCore.QObject):
         indicating the value is manually set.
         '''
         osa = ek80_param_client.OwnshipApi(self.param_api_client)
-        return osa.ownship_get_drop_keel_offset()
+        return osa.ownship_get_drop_keel_offset(_request_timeout=self.request_timeout)
 
 
     def set_drop_keel_offset(self, new_offset):
@@ -370,7 +375,7 @@ class ek80_rest_client(QtCore.QObject):
         osa = ek80_param_client.OwnshipApi(self.param_api_client)
         dropkeel_settings = ek80_param_client.ManualSetting(current_value=new_offset,
                 is_manual=True)
-        osa.ownship_set_drop_keel_offset(dropkeel_settings)
+        osa.ownship_set_drop_keel_offset(dropkeel_settings, _request_timeout=self.request_timeout)
 
 
     def get_ping_configuration(self):
@@ -378,7 +383,7 @@ class ek80_rest_client(QtCore.QObject):
         get_ping_configuration returns...
         '''
         pca = ek80_param_client.PingConfigurationApi(self.param_api_client)
-        return pca.ping_ek80_configuration_get_ping_configuration()
+        return pca.ping_ek80_configuration_get_ping_configuration(_request_timeout=self.request_timeout)
 
 
     def get_channel_transmit_power(self, channel_id):
@@ -386,7 +391,8 @@ class ek80_rest_client(QtCore.QObject):
         get_channel_transmit_power returns...
         '''
         pca = ek80_param_client.PingConfigurationApi(self.param_api_client)
-        return pca.ping_configuration_get_channel_transmit_power(channel_id)
+        return pca.ping_configuration_get_channel_transmit_power(channel_id,
+                _request_timeout=self.request_timeout)
 
 
     def get_channel_pulse_settings(self, channel_id):
@@ -394,7 +400,8 @@ class ek80_rest_client(QtCore.QObject):
         get_channel_pulse_settings returns...
         '''
         pca = ek80_param_client.PingConfigurationApi(self.param_api_client)
-        return pca.ping_configuration_get_channel_pulse_settings(channel_id)
+        return pca.ping_configuration_get_channel_pulse_settings(channel_id,
+                _request_timeout=self.request_timeout)
 
 
     def delete_bottom_detection_subscription(self, sub_id, endpoint_id=None,
