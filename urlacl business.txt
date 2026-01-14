@@ -1,0 +1,14 @@
+
+admin powershell:
+
+netsh
+http
+
+
+netsh.exe http add urlacl url=localhost:45123/ user=NMFS\rick.towler
+netsh.exe http add urlacl url=localhost:12345/ user=NMFS\rick.towler
+netsh.exe http add urlacl url=localhost:12346/ user=NMFS\rick.towler
+
+netsh.exe http delete urlacl url=localhost:45123/
+netsh.exe http delete urlacl url=localhost:12345/
+netsh.exe http delete urlacl url=localhost:12346/
