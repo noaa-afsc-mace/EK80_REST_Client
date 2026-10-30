@@ -1,0 +1,7350 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "REST API for the EK80 Echo Sounder",
+    "description": "This API is intended for use by client applications.",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/sounder/advanced-sequencing/sequence-list": {
+      "get": {
+        "tags": [
+          "advanced-sequencing"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sounder/advanced-sequencing": {
+      "get": {
+        "tags": [
+          "advanced-sequencing"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdvancedSequencingSettings"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdvancedSequencingSettings"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdvancedSequencingSettings"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "advanced-sequencing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdvancedSequencingSettings"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdvancedSequencingSettings"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdvancedSequencingSettings"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdvancedSequencingSettings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/data-output": {
+      "get": {
+        "tags": [
+          "data-output"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DataOutput"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DataOutput"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DataOutput"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/data-output/processed-data": {
+      "get": {
+        "tags": [
+          "data-output"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "data-output"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/data-storage": {
+      "get": {
+        "tags": [
+          "data-storage"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MainStorageSettings"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MainStorageSettings"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MainStorageSettings"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "data-storage"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MainStorageSettings"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MainStorageSettings"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MainStorageSettings"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MainStorageSettings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sounder/data-storage/record-raw-active": {
+      "get": {
+        "tags": [
+          "data-storage"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "data-storage"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/data-storage/sample-data-format-wbt-cw": {
+      "get": {
+        "tags": [
+          "data-storage"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "enum": [
+                    "complex",
+                    "power-angle",
+                    "power-angle-decimated"
+                  ],
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "enum": [
+                    "complex",
+                    "power-angle",
+                    "power-angle-decimated"
+                  ],
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "enum": [
+                    "complex",
+                    "power-angle",
+                    "power-angle-decimated"
+                  ],
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "data-storage"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "enum": [
+                  "complex",
+                  "power-angle",
+                  "power-angle-decimated"
+                ],
+                "type": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "enum": [
+                  "complex",
+                  "power-angle",
+                  "power-angle-decimated"
+                ],
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "enum": [
+                  "complex",
+                  "power-angle",
+                  "power-angle-decimated"
+                ],
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "enum": [
+                  "complex",
+                  "power-angle",
+                  "power-angle-decimated"
+                ],
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "enum": [
+                    "complex",
+                    "power-angle",
+                    "power-angle-decimated"
+                  ],
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "enum": [
+                    "complex",
+                    "power-angle",
+                    "power-angle-decimated"
+                  ],
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "enum": [
+                    "complex",
+                    "power-angle",
+                    "power-angle-decimated"
+                  ],
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sounder/data-storage/individual-channel-range/{channel_name}": {
+      "get": {
+        "tags": [
+          "data-storage"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualRangeControl"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualRangeControl"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualRangeControl"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sounder/data-storage/individual-channel-range": {
+      "put": {
+        "tags": [
+          "data-storage"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualRangeControl"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualRangeControl"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualRangeControl"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualRangeControl"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/diagnostics/transceiver-info": {
+      "get": {
+        "tags": [
+          "diagnostics"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransceiverParameters"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransceiverParameters"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransceiverParameters"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/diagnostics/impedance/calculations-on": {
+      "get": {
+        "tags": [
+          "diagnostics"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "diagnostics"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/diagnostics/impedance/{channelid}": {
+      "get": {
+        "tags": [
+          "diagnostics"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PingImpedanceData"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PingImpedanceData"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PingImpedanceData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/diagnostics/ping-time-monitor/is-enabled": {
+      "get": {
+        "tags": [
+          "diagnostics"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "diagnostics"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/diagnostics/ping-time-monitor": {
+      "get": {
+        "tags": [
+          "diagnostics"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemPingMonitoringInfo"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemPingMonitoringInfo"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemPingMonitoringInfo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/display": {
+      "get": {
+        "tags": [
+          "display"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisplaySettings"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisplaySettings"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisplaySettings"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/display/settings": {
+      "get": {
+        "tags": [
+          "display"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisplaySettings"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisplaySettings"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisplaySettings"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "display"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisplaySettings"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisplaySettings"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisplaySettings"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisplaySettings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/display/screen-brightness": {
+      "get": {
+        "tags": [
+          "display"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "display"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/display/display-palette": {
+      "get": {
+        "tags": [
+          "display"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "enum": [
+                    "day-black",
+                    "day-white",
+                    "night"
+                  ],
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "enum": [
+                    "day-black",
+                    "day-white",
+                    "night"
+                  ],
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "enum": [
+                    "day-black",
+                    "day-white",
+                    "night"
+                  ],
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "display"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "enum": [
+                  "day-black",
+                  "day-white",
+                  "night"
+                ],
+                "type": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "enum": [
+                  "day-black",
+                  "day-white",
+                  "night"
+                ],
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "enum": [
+                  "day-black",
+                  "day-white",
+                  "night"
+                ],
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "enum": [
+                  "day-black",
+                  "day-white",
+                  "night"
+                ],
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/display/echo-colours": {
+      "get": {
+        "tags": [
+          "display"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "enum": [
+                    "colours-12",
+                    "colours-64-sonar",
+                    "colours-64-smooth-echo-sounder",
+                    "colours-64-gray-scale",
+                    "colours-64-bi500"
+                  ],
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "enum": [
+                    "colours-12",
+                    "colours-64-sonar",
+                    "colours-64-smooth-echo-sounder",
+                    "colours-64-gray-scale",
+                    "colours-64-bi500"
+                  ],
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "enum": [
+                    "colours-12",
+                    "colours-64-sonar",
+                    "colours-64-smooth-echo-sounder",
+                    "colours-64-gray-scale",
+                    "colours-64-bi500"
+                  ],
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "display"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "enum": [
+                  "colours-12",
+                  "colours-64-sonar",
+                  "colours-64-smooth-echo-sounder",
+                  "colours-64-gray-scale",
+                  "colours-64-bi500"
+                ],
+                "type": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "enum": [
+                  "colours-12",
+                  "colours-64-sonar",
+                  "colours-64-smooth-echo-sounder",
+                  "colours-64-gray-scale",
+                  "colours-64-bi500"
+                ],
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "enum": [
+                  "colours-12",
+                  "colours-64-sonar",
+                  "colours-64-smooth-echo-sounder",
+                  "colours-64-gray-scale",
+                  "colours-64-bi500"
+                ],
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "enum": [
+                  "colours-12",
+                  "colours-64-sonar",
+                  "colours-64-smooth-echo-sounder",
+                  "colours-64-gray-scale",
+                  "colours-64-bi500"
+                ],
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/display/full-screen": {
+      "get": {
+        "tags": [
+          "display"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "display"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/display/gui-locked": {
+      "get": {
+        "tags": [
+          "display"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "display"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/environment/WaterColumn": {
+      "get": {
+        "tags": [
+          "environment"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WaterColumnData"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WaterColumnData"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WaterColumnData"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "environment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WaterColumnData"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WaterColumnData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WaterColumnData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WaterColumnData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/environment/TransducerFace": {
+      "get": {
+        "tags": [
+          "environment"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvironmentTransducerData"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvironmentTransducerData"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvironmentTransducerData"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "environment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvironmentTransducerData"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvironmentTransducerData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvironmentTransducerData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvironmentTransducerData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/installed-transceivers": {
+      "get": {
+        "tags": [
+          "installed-transceivers"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EchoSounderTransducer"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EchoSounderTransducer"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EchoSounderTransducer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sounder/installed-transceivers/{channelid}": {
+      "get": {
+        "tags": [
+          "installed-transceivers"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EchoSounderTransducer"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EchoSounderTransducer"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EchoSounderTransducer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sounder/installed-transceivers/{channellistindex}": {
+      "get": {
+        "tags": [
+          "installed-transceivers"
+        ],
+        "parameters": [
+          {
+            "name": "channellistindex",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EchoSounderTransducer"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EchoSounderTransducer"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EchoSounderTransducer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ownship": {
+      "get": {
+        "tags": [
+          "ownship"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ownship"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ownship"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ownship"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ownship/navigation": {
+      "get": {
+        "tags": [
+          "ownship"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NavigationData"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NavigationData"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NavigationData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ownship/motion": {
+      "get": {
+        "tags": [
+          "ownship"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MotionData"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MotionData"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MotionData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ownship/dimension": {
+      "get": {
+        "tags": [
+          "ownship"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dimension"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dimension"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dimension"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ownship/manual-settings/drop-keel-offset": {
+      "get": {
+        "tags": [
+          "ownship"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualSetting"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualSetting"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualSetting"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ownship"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualSetting"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualSetting"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualSetting"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualSetting"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ownship/manual-settings/water-level": {
+      "get": {
+        "tags": [
+          "ownship"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualSetting"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualSetting"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualSetting"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ownship"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualSetting"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualSetting"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualSetting"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualSetting"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ownship/manual-settings/vessel-speed": {
+      "get": {
+        "tags": [
+          "ownship"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualSetting"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualSetting"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualSetting"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ownship"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualSetting"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualSetting"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualSetting"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualSetting"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ownship/manual-settings": {
+      "get": {
+        "tags": [
+          "ownship"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ManualSetting"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ManualSetting"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ManualSetting"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ownship/installation/transducers": {
+      "get": {
+        "tags": [
+          "ownship"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/Installation"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/Installation"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/Installation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ownship/installation/{transducerId}": {
+      "put": {
+        "tags": [
+          "ownship"
+        ],
+        "parameters": [
+          {
+            "name": "transducerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Installation"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Installation"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Installation"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Installation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/ping-configuration/channel-list": {
+      "get": {
+        "tags": [
+          "ping-configuration"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sounder/ping-configuration/{channelid}/pulse-settings": {
+      "get": {
+        "tags": [
+          "ping-configuration"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PulseSettings"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PulseSettings"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PulseSettings"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ping-configuration"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PulseSettings"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PulseSettings"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PulseSettings"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PulseSettings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sounder/ping-configuration/{channelid}/transmit-power": {
+      "get": {
+        "tags": [
+          "ping-configuration"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "number",
+                  "format": "double"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ping-configuration"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sounder/ping-configuration/sequencing": {
+      "get": {
+        "tags": [
+          "ping-configuration"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ping-configuration"
+        ],
+        "parameters": [
+          {
+            "name": "sequencing",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/sounder/ping-configuration/{channelid}/adcp": {
+      "get": {
+        "tags": [
+          "ping-configuration"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdcpConfigurationEc150"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdcpConfigurationEc150"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdcpConfigurationEc150"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ping-configuration"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdcpConfigurationEc150"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdcpConfigurationEc150"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdcpConfigurationEc150"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdcpConfigurationEc150"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/sounder/ping-info": {
+      "get": {
+        "tags": [
+          "ping-info"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutedPing"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutedPing"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutedPing"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sounder/ping-info/{channelid}": {
+      "get": {
+        "tags": [
+          "ping-info"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelPingConfiguration"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelPingConfiguration"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelPingConfiguration"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/ping-info": {
+      "get": {
+        "tags": [
+          "ping-info-common"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutedPing"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutedPing"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutedPing"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/bottom-detection": {
+      "get": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SounderBottomDetection"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SounderBottomDetection"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SounderBottomDetection"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SounderBottomDetection"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SounderBottomDetection"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SounderBottomDetection"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SounderBottomDetection"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/bottom-detection/bottom-detection-active": {
+      "get": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/bottom-detection/minimum-depth": {
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/bottom-detection/maximum-depth": {
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/bottom-detection/bottom-backstep": {
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/adcp": {
+      "get": {
+        "tags": [
+          "processing"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessingAdcp"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessingAdcp"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessingAdcp"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/adcp": {
+      "get": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessingAdcp"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessingAdcp"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessingAdcp"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/adcp/error-velocity-limit": {
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/adcp/is-error-velocity-limit-active": {
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/adcp/correlation-limit-percentage": {
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/adcp/is-correlation-limit-percentage-active": {
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/adcp/min-quality-average-data-percentage": {
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/adcp/is-min-quality-average-data-factor-active": {
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/adcp/sv-dB-low-limit": {
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/adcp/is-sv-dB-low-limit-active": {
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/adcp/sv-dB-high-limit": {
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/adcp/is-sv-dB-high-limit-active": {
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/{channel_name}/adcp/use-epoch-time": {
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "parameters": [
+          {
+            "name": "channel_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sounder/processing/calculation-interval": {
+      "get": {
+        "tags": [
+          "processing"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SounderCalculationInterval"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SounderCalculationInterval"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SounderCalculationInterval"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "processing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SounderCalculationInterval"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SounderCalculationInterval"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SounderCalculationInterval"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SounderCalculationInterval"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/sensors": {
+      "get": {
+        "tags": [
+          "sensors"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sensors/available-sensors": {
+      "get": {
+        "tags": [
+          "sensors"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvailableSensor"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvailableSensor"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvailableSensor"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sensors/installed-sensors": {
+      "get": {
+        "tags": [
+          "sensors"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConfiguredSensorDefinition"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConfiguredSensorDefinition"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConfiguredSensorDefinition"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "sensors"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfiguredSensorDefinition"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfiguredSensorDefinition"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfiguredSensorDefinition"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfiguredSensorDefinition"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sensors/installed-sensors/{customName}": {
+      "delete": {
+        "tags": [
+          "sensors"
+        ],
+        "parameters": [
+          {
+            "name": "customName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/system": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationalState"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationalState"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationalState"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/system/operational-state": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationalState"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationalState"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationalState"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/system/operation-mode": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "enum": [
+                    "inactive",
+                    "normal",
+                    "replay",
+                    "simulation",
+                    "mission"
+                  ],
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "enum": [
+                    "inactive",
+                    "normal",
+                    "replay",
+                    "simulation",
+                    "mission"
+                  ],
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "enum": [
+                    "inactive",
+                    "normal",
+                    "replay",
+                    "simulation",
+                    "mission"
+                  ],
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "system"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "enum": [
+                  "inactive",
+                  "normal",
+                  "replay",
+                  "simulation",
+                  "mission"
+                ],
+                "type": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "enum": [
+                  "inactive",
+                  "normal",
+                  "replay",
+                  "simulation",
+                  "mission"
+                ],
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "enum": [
+                  "inactive",
+                  "normal",
+                  "replay",
+                  "simulation",
+                  "mission"
+                ],
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "enum": [
+                  "inactive",
+                  "normal",
+                  "replay",
+                  "simulation",
+                  "mission"
+                ],
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/system/play-state": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "enum": [
+                    "stopped",
+                    "running",
+                    "paused"
+                  ],
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "enum": [
+                    "stopped",
+                    "running",
+                    "paused"
+                  ],
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "enum": [
+                    "stopped",
+                    "running",
+                    "paused"
+                  ],
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "system"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "enum": [
+                  "stopped",
+                  "running",
+                  "paused"
+                ],
+                "type": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "enum": [
+                  "stopped",
+                  "running",
+                  "paused"
+                ],
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "enum": [
+                  "stopped",
+                  "running",
+                  "paused"
+                ],
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "enum": [
+                  "stopped",
+                  "running",
+                  "paused"
+                ],
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/system/ping-mode": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "enum": [
+                    "single",
+                    "interval",
+                    "maximum"
+                  ],
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "enum": [
+                    "single",
+                    "interval",
+                    "maximum"
+                  ],
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "enum": [
+                    "single",
+                    "interval",
+                    "maximum"
+                  ],
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "system"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "enum": [
+                  "single",
+                  "interval",
+                  "maximum"
+                ],
+                "type": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "enum": [
+                  "single",
+                  "interval",
+                  "maximum"
+                ],
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "enum": [
+                  "single",
+                  "interval",
+                  "maximum"
+                ],
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "enum": [
+                  "single",
+                  "interval",
+                  "maximum"
+                ],
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/system/ping-interval": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "system"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/system/external-sync/mode": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "enum": [
+                    "standAlone",
+                    "master",
+                    "slave"
+                  ],
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "enum": [
+                    "standAlone",
+                    "master",
+                    "slave"
+                  ],
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "enum": [
+                    "standAlone",
+                    "master",
+                    "slave"
+                  ],
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "system"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "enum": [
+                  "standAlone",
+                  "master",
+                  "slave"
+                ],
+                "type": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "enum": [
+                  "standAlone",
+                  "master",
+                  "slave"
+                ],
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "enum": [
+                  "standAlone",
+                  "master",
+                  "slave"
+                ],
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "enum": [
+                  "standAlone",
+                  "master",
+                  "slave"
+                ],
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/system/external-sync/delay": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "system"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/system/external-sync": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalSync"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalSync"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalSync"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "system"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalSync"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalSync"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalSync"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalSync"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/system/active-user-settings": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "system"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/system/application-details": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/transducer-capabilities": {
+      "get": {
+        "tags": [
+          "transducer-capabilities"
+        ],
+        "summary": "GetTransducerCapabilities",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransducerCapabilities"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransducerCapabilities"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransducerCapabilities"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/transducer-capabilities/{channelid}": {
+      "get": {
+        "tags": [
+          "transducer-capabilities"
+        ],
+        "parameters": [
+          {
+            "name": "channelid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransducerCapabilities"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransducerCapabilities"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransducerCapabilities"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/transducer-capabilities/single-transducers": {
+      "get": {
+        "tags": [
+          "transducer-capabilities"
+        ],
+        "summary": "GetSingleTransducerCapabilities",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SingleTransducerCapabilities"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SingleTransducerCapabilities"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SingleTransducerCapabilities"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/transducer-capabilities/single-split-transducers": {
+      "get": {
+        "tags": [
+          "transducer-capabilities"
+        ],
+        "summary": "GetSingleSplitTransducerCapabilities",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SingleSplitTransducerCapabilities"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SingleSplitTransducerCapabilities"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SingleSplitTransducerCapabilities"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/transducer-capabilities/adcp-transducers": {
+      "get": {
+        "tags": [
+          "transducer-capabilities"
+        ],
+        "summary": "GetAdcpTransducerCapabilities",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AdcpTransducerCapabilities"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AdcpTransducerCapabilities"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AdcpTransducerCapabilities"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/transducer-capabilities/array-transducers": {
+      "get": {
+        "tags": [
+          "transducer-capabilities"
+        ],
+        "summary": "GetArrayTransducerCapabilities",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ArrayTransducerCapabilities"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ArrayTransducerCapabilities"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ArrayTransducerCapabilities"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AdcpConfigurationEc150": {
+        "type": "object",
+        "properties": {
+          "ec150-mode": {
+            "enum": [
+              "adcp",
+              "echoSounder"
+            ],
+            "type": "string"
+          },
+          "depth-cell-size": {
+            "type": "number",
+            "format": "float"
+          },
+          "max-current-speed": {
+            "type": "number",
+            "format": "float"
+          },
+          "pulse-type": {
+            "enum": [
+              "cw",
+              "lfmUp"
+            ],
+            "type": "string"
+          },
+          "ping-average": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdcpTransducerCapabilities": {
+        "type": "object",
+        "properties": {
+          "transducer-custom-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "unique-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "transducer-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "serial-number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "article-number": {
+            "type": "string",
+            "nullable": true
+          },
+          "is-fixed-beam": {
+            "type": "boolean"
+          },
+          "nominal-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "minimum-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "maximum-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "max-band-width": {
+            "type": "number",
+            "format": "double"
+          },
+          "nominal-beam-opening": {
+            "$ref": "#/components/schemas/BeamAxes"
+          },
+          "max-tx-power": {
+            "type": "number",
+            "format": "double"
+          },
+          "is-multiplexed": {
+            "type": "boolean"
+          },
+          "transceiver-capabilities": {
+            "$ref": "#/components/schemas/TransceiverCapabilities"
+          },
+          "beam-type": {
+            "type": "string",
+            "nullable": true
+          },
+          "gain": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          },
+          "sa-correction": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          },
+          "element-layout": {
+            "type": "string",
+            "nullable": true
+          },
+          "number-of-elements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "beam-type-number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "channel-modes": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "active",
+                "passive",
+                "test"
+              ],
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "pulse-forms": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "cw",
+                "hfm",
+                "lfm-up",
+                "lfm-down",
+                "user-defined"
+              ],
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdvancedSequencingSettings": {
+        "type": "object",
+        "properties": {
+          "sequences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Sequence"
+            },
+            "nullable": true
+          },
+          "ensembles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ensemble"
+            },
+            "nullable": true
+          },
+          "ping-groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PingGroup"
+            },
+            "nullable": true
+          },
+          "pings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PingSequence"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AngleOffset": {
+        "type": "object",
+        "properties": {
+          "alpha": {
+            "type": "number",
+            "format": "float"
+          },
+          "beta": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AngleSensitivity": {
+        "type": "object",
+        "properties": {
+          "alpha": {
+            "type": "number",
+            "format": "float"
+          },
+          "beta": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApplicationDetails": {
+        "type": "object",
+        "properties": {
+          "application-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "application-type": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ArrayTransducerCapabilities": {
+        "type": "object",
+        "properties": {
+          "transducer-custom-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "unique-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "transducer-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "serial-number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "article-number": {
+            "type": "string",
+            "nullable": true
+          },
+          "is-fixed-beam": {
+            "type": "boolean"
+          },
+          "nominal-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "minimum-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "maximum-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "max-band-width": {
+            "type": "number",
+            "format": "double"
+          },
+          "nominal-beam-opening": {
+            "$ref": "#/components/schemas/BeamAxes"
+          },
+          "max-tx-power": {
+            "type": "number",
+            "format": "double"
+          },
+          "is-multiplexed": {
+            "type": "boolean"
+          },
+          "transceiver-capabilities": {
+            "$ref": "#/components/schemas/TransceiverCapabilities"
+          },
+          "split-beam-percentage": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AvailableSensor": {
+        "type": "object",
+        "properties": {
+          "sensor-type": {
+            "type": "string",
+            "nullable": true
+          },
+          "telegram-protocol": {
+            "type": "string",
+            "nullable": true
+          },
+          "telegram-timeout": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "has-offset": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "has-rotation": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "available-telegrams": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BeamAxes": {
+        "type": "object",
+        "properties": {
+          "alpha": {
+            "type": "number",
+            "format": "double"
+          },
+          "beta": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BeamProcessingData": {
+        "type": "object",
+        "properties": {
+          "directivity-drop-at-2x-beam-width": {
+            "type": "number",
+            "format": "float"
+          },
+          "equivalent-beam-angle": {
+            "type": "number",
+            "format": "float"
+          },
+          "impedance": {
+            "type": "number",
+            "format": "float"
+          },
+          "impedance-phase": {
+            "type": "number",
+            "format": "float"
+          },
+          "sa-correction": {
+            "type": "number",
+            "format": "float"
+          },
+          "angle-offset": {
+            "$ref": "#/components/schemas/AngleOffset"
+          },
+          "angle-sensitivity": {
+            "$ref": "#/components/schemas/AngleSensitivity"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChannelPingConfiguration": {
+        "type": "object",
+        "properties": {
+          "ping": {
+            "$ref": "#/components/schemas/Ping"
+          },
+          "fan": {
+            "$ref": "#/components/schemas/RxFan"
+          },
+          "transducer": {
+            "$ref": "#/components/schemas/Transducer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChannelSubscriptionInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "channel-id": {
+            "type": "string",
+            "nullable": true
+          },
+          "range-requested": {
+            "type": "number",
+            "format": "double"
+          },
+          "required-range-time-ms": {
+            "type": "number",
+            "format": "double"
+          },
+          "processing-time-ms": {
+            "type": "number",
+            "format": "double"
+          },
+          "extra-time-ms": {
+            "type": "number",
+            "format": "double"
+          },
+          "subscriber-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "subscriber-type-end-user": {
+            "type": "string",
+            "nullable": true
+          },
+          "subscriber-string": {
+            "type": "string",
+            "nullable": true
+          },
+          "show-range-info": {
+            "type": "boolean"
+          },
+          "show-processing-time": {
+            "type": "boolean"
+          },
+          "show-extra-time": {
+            "type": "boolean"
+          },
+          "is-processing-subscription": {
+            "type": "boolean"
+          },
+          "max-measure-value": {
+            "$ref": "#/components/schemas/MeasureValue"
+          },
+          "subscription-range": {
+            "type": "number",
+            "format": "double"
+          },
+          "subscription-range-start": {
+            "type": "number",
+            "format": "double"
+          },
+          "echogram-or-layer-type": {
+            "type": "string",
+            "nullable": true
+          },
+          "subscription-type": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChannelSubscriptions": {
+        "type": "object",
+        "properties": {
+          "channel-id": {
+            "type": "string",
+            "nullable": true
+          },
+          "is-active": {
+            "type": "boolean"
+          },
+          "duty-cycle-delay-ms": {
+            "type": "number",
+            "format": "double"
+          },
+          "transceiver-charging-time-ms": {
+            "type": "number",
+            "format": "double"
+          },
+          "max-time-required-subscription": {
+            "$ref": "#/components/schemas/MeasureValue"
+          },
+          "subscriptions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelSubscriptionInfo"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConfiguredSensorDefinition": {
+        "type": "object",
+        "properties": {
+          "sensor-type": {
+            "type": "string",
+            "nullable": true
+          },
+          "telegram-protocol": {
+            "type": "string",
+            "nullable": true
+          },
+          "custom-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "configured-telegrams": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "port-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "sensor-timeout": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "talker-id": {
+            "type": "string",
+            "nullable": true
+          },
+          "sensor-offset": {
+            "$ref": "#/components/schemas/Offset"
+          },
+          "sensor-rotation": {
+            "$ref": "#/components/schemas/Rotation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataOutput": {
+        "type": "object",
+        "properties": {
+          "output-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "output-type": {
+            "type": "string",
+            "nullable": true
+          },
+          "output-destination": {
+            "enum": [
+              "none",
+              "port",
+              "file"
+            ],
+            "type": "string"
+          },
+          "port-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "selected-channel": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Dimension": {
+        "type": "object",
+        "properties": {
+          "length": {
+            "type": "number",
+            "format": "double"
+          },
+          "width": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DisplaySettings": {
+        "type": "object",
+        "properties": {
+          "display-palette": {
+            "enum": [
+              "day-black",
+              "day-white",
+              "night"
+            ],
+            "type": "string"
+          },
+          "echo-colours": {
+            "enum": [
+              "colours-12",
+              "colours-64-sonar",
+              "colours-64-smooth-echo-sounder",
+              "colours-64-gray-scale",
+              "colours-64-bi500"
+            ],
+            "type": "string"
+          },
+          "brightness": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "full-screen": {
+            "type": "boolean"
+          },
+          "gui-locked": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DoubleValueWithInputStatus": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number",
+            "format": "double"
+          },
+          "input-status": {
+            "enum": [
+              "timeout",
+              "ok",
+              "degraded",
+              "invalid"
+            ],
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EchoSounderPing": {
+        "type": "object",
+        "properties": {
+          "ping-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "range": {
+            "type": "number",
+            "format": "double"
+          },
+          "frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "tx-amplitude": {
+            "$ref": "#/components/schemas/TxAmplitudeData"
+          },
+          "pulse": {
+            "$ref": "#/components/schemas/PulseData"
+          },
+          "channel-mode": {
+            "enum": [
+              "active",
+              "passive",
+              "test"
+            ],
+            "type": "string"
+          },
+          "weight-set-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "octopus-ping": {
+            "$ref": "#/components/schemas/OctopusPingParameters"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EchoSounderTransducer": {
+        "type": "object",
+        "properties": {
+          "acoustic-source-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "pings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EchoSounderPing"
+            },
+            "nullable": true
+          },
+          "installation": {
+            "$ref": "#/components/schemas/Installation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Ensemble": {
+        "type": "object",
+        "properties": {
+          "ensemble-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "ensemble-ping-groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnsemblePingGroup"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EnsemblePingGroup": {
+        "type": "object",
+        "properties": {
+          "ping-group-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "iterations": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EnvironmentTransducerData": {
+        "type": "object",
+        "properties": {
+          "transducer-sound-speed-source": {
+            "enum": [
+              "manual",
+              "calculated",
+              "profile",
+              "probe"
+            ],
+            "type": "string"
+          },
+          "transducer-manual-sound-speed": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExecutedPing": {
+        "type": "object",
+        "properties": {
+          "ping-information": {
+            "$ref": "#/components/schemas/PingInformation"
+          },
+          "ping-configuration": {
+            "$ref": "#/components/schemas/PingConfiguration"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExternalSync": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "enum": [
+              "standAlone",
+              "master",
+              "slave"
+            ],
+            "type": "string"
+          },
+          "delay": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilterStage": {
+        "type": "object",
+        "properties": {
+          "decimation": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "coefficients": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "format": "float"
+              }
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeoVector": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "float"
+          },
+          "y": {
+            "type": "number",
+            "format": "float"
+          },
+          "z": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IndividualRangeControl": {
+        "type": "object",
+        "properties": {
+          "channel-id": {
+            "type": "string",
+            "nullable": true
+          },
+          "individual-channel-range": {
+            "type": "number",
+            "format": "double"
+          },
+          "individual-channel-auto": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Installation": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "$ref": "#/components/schemas/Offset"
+          },
+          "rotation": {
+            "$ref": "#/components/schemas/Rotation"
+          },
+          "mounting": {
+            "enum": [
+              "hull-mounted",
+              "drop-keel",
+              "towed"
+            ],
+            "type": "string"
+          },
+          "orientation": {
+            "enum": [
+              "horizontal",
+              "vertical",
+              "port",
+              "starboard",
+              "upwards"
+            ],
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MainStorageSettings": {
+        "type": "object",
+        "properties": {
+          "file-path": {
+            "type": "string",
+            "nullable": true
+          },
+          "raw-file-name-prefix": {
+            "type": "string",
+            "nullable": true
+          },
+          "max-file-size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "min-free-disk-space": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sample-range": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sample-range-auto": {
+            "type": "boolean"
+          },
+          "individual-range-control": {
+            "type": "boolean"
+          },
+          "record-raw-active": {
+            "type": "boolean"
+          },
+          "sample-data-format-wbt-cw": {
+            "enum": [
+              "complex",
+              "power-angle",
+              "power-angle-decimated"
+            ],
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ManualSetting": {
+        "type": "object",
+        "properties": {
+          "current-value": {
+            "type": "number",
+            "format": "double"
+          },
+          "is-manual": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MeasureValue": {
+        "type": "object",
+        "properties": {
+          "measure-type": {
+            "enum": [
+              "range-time",
+              "processing-time",
+              "extra-delay",
+              "total-elapsed-time",
+              "duty-cycle"
+            ],
+            "type": "string"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MotionData": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "has-timed-out": {
+            "type": "boolean"
+          },
+          "heave": {
+            "type": "number",
+            "format": "double"
+          },
+          "sway": {
+            "type": "number",
+            "format": "double"
+          },
+          "surge": {
+            "type": "number",
+            "format": "double"
+          },
+          "yaw": {
+            "type": "number",
+            "format": "double"
+          },
+          "pitch": {
+            "type": "number",
+            "format": "double"
+          },
+          "roll": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NavigationData": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "has-timed-out": {
+            "type": "boolean"
+          },
+          "position": {
+            "$ref": "#/components/schemas/PositionInfo"
+          },
+          "course": {
+            "$ref": "#/components/schemas/DoubleValueWithInputStatus"
+          },
+          "speed": {
+            "$ref": "#/components/schemas/DoubleValueWithInputStatus"
+          },
+          "heading": {
+            "$ref": "#/components/schemas/DoubleValueWithInputStatus"
+          },
+          "vessel-distance": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OctopusPingParameters": {
+        "type": "object",
+        "properties": {
+          "max-vessel-speed": {
+            "type": "number",
+            "format": "double"
+          },
+          "max-current-speed": {
+            "type": "number",
+            "format": "double"
+          },
+          "depth-cell-size": {
+            "type": "number",
+            "format": "double"
+          },
+          "auto-depth-cell-size": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Offset": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "double"
+          },
+          "y": {
+            "type": "number",
+            "format": "double"
+          },
+          "z": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OperationalState": {
+        "type": "object",
+        "properties": {
+          "operation-mode": {
+            "enum": [
+              "inactive",
+              "normal",
+              "replay",
+              "simulation",
+              "mission"
+            ],
+            "type": "string"
+          },
+          "ping-mode": {
+            "enum": [
+              "single",
+              "interval",
+              "maximum"
+            ],
+            "type": "string"
+          },
+          "play-state": {
+            "enum": [
+              "stopped",
+              "running",
+              "paused"
+            ],
+            "type": "string"
+          },
+          "external-sync": {
+            "$ref": "#/components/schemas/ExternalSync"
+          },
+          "active-user-setting": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Ownship": {
+        "type": "object",
+        "properties": {
+          "navigation": {
+            "$ref": "#/components/schemas/NavigationData"
+          },
+          "motion": {
+            "$ref": "#/components/schemas/MotionData"
+          },
+          "dimension": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "manual-settings": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ManualSetting"
+            },
+            "nullable": true
+          },
+          "installation": {
+            "$ref": "#/components/schemas/ManualSetting"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Ping": {
+        "type": "object",
+        "properties": {
+          "channel-id": {
+            "type": "string",
+            "nullable": true
+          },
+          "ping-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "tx-power": {
+            "type": "number",
+            "format": "float"
+          },
+          "tx-gain": {
+            "type": "number",
+            "format": "float"
+          },
+          "tx-geometry": {
+            "$ref": "#/components/schemas/SectorGeometry"
+          },
+          "pulse": {
+            "$ref": "#/components/schemas/PulseSetting"
+          },
+          "channel-mode": {
+            "enum": [
+              "active",
+              "passive",
+              "test"
+            ],
+            "type": "string"
+          },
+          "transducer-name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PingConfiguration": {
+        "type": "object",
+        "properties": {
+          "pings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ping"
+            },
+            "nullable": true
+          },
+          "fans": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RxFan"
+            },
+            "nullable": true
+          },
+          "transducers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transducer"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PingGroup": {
+        "type": "object",
+        "properties": {
+          "ping-group-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "interval": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ping-mode": {
+            "enum": [
+              "single",
+              "interval",
+              "maximum"
+            ],
+            "type": "string"
+          },
+          "ping-group-pings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PingGroupPing"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PingGroupPing": {
+        "type": "object",
+        "properties": {
+          "ping-name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PingGroupSubscriptionsInfo": {
+        "type": "object",
+        "properties": {
+          "is-active": {
+            "type": "boolean"
+          },
+          "group-id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "group-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "last-ping-delta-ms": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "channel-subscriptions-info": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelSubscriptions"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PingImpedanceData": {
+        "type": "object",
+        "properties": {
+          "ping-time": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ping-number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "frequency-start": {
+            "type": "number",
+            "format": "double"
+          },
+          "frequency-end": {
+            "type": "number",
+            "format": "double"
+          },
+          "channel-mode": {
+            "enum": [
+              "active",
+              "passive",
+              "test"
+            ],
+            "type": "string"
+          },
+          "pulse-type": {
+            "enum": [
+              "cw",
+              "hfm",
+              "lfm-up",
+              "lfm-down",
+              "user-defined"
+            ],
+            "type": "string"
+          },
+          "sectors-data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SectorImpedanceData"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PingInformation": {
+        "type": "object",
+        "properties": {
+          "ping-number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ping-time": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "vessel-depth": {
+            "type": "number",
+            "format": "double"
+          },
+          "vessel-distance": {
+            "type": "number",
+            "format": "double"
+          },
+          "speed": {
+            "type": "number",
+            "format": "double"
+          },
+          "heading": {
+            "type": "number",
+            "format": "double"
+          },
+          "heave": {
+            "type": "number",
+            "format": "double"
+          },
+          "roll": {
+            "type": "number",
+            "format": "double"
+          },
+          "pitch": {
+            "type": "number",
+            "format": "double"
+          },
+          "sound-velocity": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PingSequence": {
+        "type": "object",
+        "properties": {
+          "ping-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "ping": {
+            "$ref": "#/components/schemas/PingSettings"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PingSettings": {
+        "type": "object",
+        "properties": {
+          "transducer-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "suffix": {
+            "type": "string",
+            "nullable": true
+          },
+          "pulse-type": {
+            "enum": [
+              "cw",
+              "hfm",
+              "lfm-up",
+              "lfm-down",
+              "user-defined"
+            ],
+            "type": "string"
+          },
+          "pulse-duration": {
+            "type": "number",
+            "format": "double"
+          },
+          "start-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "end-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "channel-mode": {
+            "enum": [
+              "active",
+              "passive",
+              "test"
+            ],
+            "type": "string"
+          },
+          "ramping": {
+            "enum": [
+              "fast",
+              "slow"
+            ],
+            "type": "string"
+          },
+          "filter-type": {
+            "enum": [
+              "standard-resolution",
+              "short",
+              "high-resolution",
+              "low-resolution",
+              "full-resolution",
+              "hydrophone"
+            ],
+            "type": "string"
+          },
+          "transmit-power": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PositionInfo": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "input-status": {
+            "enum": [
+              "timeout",
+              "ok",
+              "degraded",
+              "invalid"
+            ],
+            "type": "string"
+          },
+          "depth": {
+            "$ref": "#/components/schemas/DoubleValueWithInputStatus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProcessingAdcp": {
+        "type": "object",
+        "properties": {
+          "error-velocity-limit": {
+            "type": "number",
+            "format": "double"
+          },
+          "is-error-velocity-limit-active": {
+            "type": "boolean"
+          },
+          "correlation-limit-percentage": {
+            "type": "number",
+            "format": "double"
+          },
+          "is-correlation-limit-percentage-active": {
+            "type": "boolean"
+          },
+          "min-quality-average-data-percentage": {
+            "type": "number",
+            "format": "double"
+          },
+          "is-min-quality-average-data-factor-active": {
+            "type": "boolean"
+          },
+          "sv-dB-low-limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "is-sv-dB-low-limit-active": {
+            "type": "boolean"
+          },
+          "sv-dB-high-limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "is-sv-dB-high-limit-active": {
+            "type": "boolean"
+          },
+          "use-epoch-time": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PulseData": {
+        "type": "object",
+        "properties": {
+          "auto": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "format": "double"
+          },
+          "band-width": {
+            "type": "number",
+            "format": "double"
+          },
+          "tapering": {
+            "type": "number",
+            "format": "double"
+          },
+          "filter-type": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PulseSetting": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "format": "float"
+          },
+          "slope": {
+            "type": "number",
+            "format": "float"
+          },
+          "center-frequency": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sweep-rate": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PulseSettings": {
+        "type": "object",
+        "properties": {
+          "pulse-type": {
+            "enum": [
+              "cw",
+              "hfm",
+              "lfm-up",
+              "lfm-down",
+              "user-defined"
+            ],
+            "type": "string"
+          },
+          "pulse-duration": {
+            "type": "number",
+            "format": "double"
+          },
+          "start-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "end-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "channel-mode": {
+            "enum": [
+              "active",
+              "passive",
+              "test"
+            ],
+            "type": "string"
+          },
+          "ramping": {
+            "enum": [
+              "fast",
+              "slow"
+            ],
+            "type": "string"
+          },
+          "filter-type": {
+            "enum": [
+              "standard-resolution",
+              "short",
+              "high-resolution",
+              "low-resolution",
+              "full-resolution",
+              "hydrophone"
+            ],
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Rotation": {
+        "type": "object",
+        "properties": {
+          "around-x": {
+            "type": "number",
+            "format": "double"
+          },
+          "around-y": {
+            "type": "number",
+            "format": "double"
+          },
+          "around-z": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RotationAngles": {
+        "type": "object",
+        "properties": {
+          "around-x": {
+            "type": "number",
+            "format": "float"
+          },
+          "around-y": {
+            "type": "number",
+            "format": "float"
+          },
+          "around-z": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RxBeam": {
+        "type": "object",
+        "properties": {
+          "beam-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rx-gain": {
+            "type": "number",
+            "format": "float"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/SectorGeometry"
+          },
+          "beam-processing-data": {
+            "$ref": "#/components/schemas/BeamProcessingData"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RxFan": {
+        "type": "object",
+        "properties": {
+          "fan-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "delay": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "range": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "absorption-coefficient": {
+            "type": "number",
+            "format": "float"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/SectorGeometry"
+          },
+          "sampling-info": {
+            "$ref": "#/components/schemas/SamplingInfo"
+          },
+          "beams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RxBeam"
+            },
+            "nullable": true
+          },
+          "filter-stages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterStage"
+            },
+            "nullable": true
+          },
+          "ping-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "transducer-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "sonar-fan-processing-parameters": {
+            "$ref": "#/components/schemas/SonarFanProcessingParameters"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SamplingInfo": {
+        "type": "object",
+        "properties": {
+          "decimation": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rx-band-width": {
+            "type": "number",
+            "format": "float"
+          },
+          "sample-interval": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SectorGeometry": {
+        "type": "object",
+        "properties": {
+          "opening": {
+            "$ref": "#/components/schemas/SectorOpening"
+          },
+          "steering": {
+            "$ref": "#/components/schemas/GeoVector"
+          },
+          "rotation": {
+            "$ref": "#/components/schemas/GeoVector"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SectorImpedanceData": {
+        "type": "object",
+        "properties": {
+          "impedance": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            },
+            "nullable": true
+          },
+          "phase": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            },
+            "nullable": true
+          },
+          "voltage": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            },
+            "nullable": true
+          },
+          "current": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SectorOpening": {
+        "type": "object",
+        "properties": {
+          "alpha": {
+            "type": "number",
+            "format": "float"
+          },
+          "beta": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Sequence": {
+        "type": "object",
+        "properties": {
+          "sequence-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "sequence-ensembles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SequenceEnsemble"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SequenceEnsemble": {
+        "type": "object",
+        "properties": {
+          "sequence-ensemble-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "iterations": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SingleSplitTransducerCapabilities": {
+        "type": "object",
+        "properties": {
+          "transducer-custom-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "unique-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "transducer-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "serial-number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "article-number": {
+            "type": "string",
+            "nullable": true
+          },
+          "is-fixed-beam": {
+            "type": "boolean"
+          },
+          "nominal-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "minimum-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "maximum-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "max-band-width": {
+            "type": "number",
+            "format": "double"
+          },
+          "nominal-beam-opening": {
+            "$ref": "#/components/schemas/BeamAxes"
+          },
+          "max-tx-power": {
+            "type": "number",
+            "format": "double"
+          },
+          "is-multiplexed": {
+            "type": "boolean"
+          },
+          "transceiver-capabilities": {
+            "$ref": "#/components/schemas/TransceiverCapabilities"
+          },
+          "beam-type": {
+            "type": "string",
+            "nullable": true
+          },
+          "beam-id": {
+            "type": "string",
+            "nullable": true
+          },
+          "gain": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          },
+          "sa-correction": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          },
+          "equivalent-2-way-beam-angle": {
+            "type": "number",
+            "format": "double"
+          },
+          "directivity-drop-at-2-x-beam-width": {
+            "type": "number",
+            "format": "double"
+          },
+          "pulse-durations-map": {
+            "type": "object",
+            "properties": {
+              "cw": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "hfm": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "lfm-up": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "lfm-down": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "user-defined": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                }
+              }
+            },
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "channel-modes": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "active",
+                "passive",
+                "test"
+              ],
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "pulse-forms": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "cw",
+                "hfm",
+                "lfm-up",
+                "lfm-down",
+                "user-defined"
+              ],
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "element-layout": {
+            "type": "string",
+            "nullable": true
+          },
+          "number-of-elements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "td-element-separation": {
+            "type": "number",
+            "format": "double"
+          },
+          "beam-type-number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "beam-angle-sensitivity": {
+            "$ref": "#/components/schemas/BeamAxes"
+          },
+          "beam-offset": {
+            "$ref": "#/components/schemas/BeamAxes"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SingleTransducerCapabilities": {
+        "type": "object",
+        "properties": {
+          "transducer-custom-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "unique-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "transducer-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "serial-number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "article-number": {
+            "type": "string",
+            "nullable": true
+          },
+          "is-fixed-beam": {
+            "type": "boolean"
+          },
+          "nominal-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "minimum-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "maximum-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "max-band-width": {
+            "type": "number",
+            "format": "double"
+          },
+          "nominal-beam-opening": {
+            "$ref": "#/components/schemas/BeamAxes"
+          },
+          "max-tx-power": {
+            "type": "number",
+            "format": "double"
+          },
+          "is-multiplexed": {
+            "type": "boolean"
+          },
+          "transceiver-capabilities": {
+            "$ref": "#/components/schemas/TransceiverCapabilities"
+          },
+          "beam-type": {
+            "type": "string",
+            "nullable": true
+          },
+          "beam-id": {
+            "type": "string",
+            "nullable": true
+          },
+          "gain": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          },
+          "sa-correction": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          },
+          "equivalent-2-way-beam-angle": {
+            "type": "number",
+            "format": "double"
+          },
+          "directivity-drop-at-2-x-beam-width": {
+            "type": "number",
+            "format": "double"
+          },
+          "pulse-durations-map": {
+            "type": "object",
+            "properties": {
+              "cw": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "hfm": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "lfm-up": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "lfm-down": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "user-defined": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                }
+              }
+            },
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "channel-modes": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "active",
+                "passive",
+                "test"
+              ],
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "pulse-forms": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "cw",
+                "hfm",
+                "lfm-up",
+                "lfm-down",
+                "user-defined"
+              ],
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "beam-type-number": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SonarFanProcessingParameters": {
+        "type": "object",
+        "properties": {
+          "agc": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rcg": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amp-gain": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "noise-filter": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tvg-a": {
+            "type": "number",
+            "format": "double"
+          },
+          "tvg-b": {
+            "type": "number",
+            "format": "double"
+          },
+          "tvg-c": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SounderBottomDetection": {
+        "type": "object",
+        "properties": {
+          "bottom-detection-active": {
+            "type": "boolean"
+          },
+          "maximum-depth": {
+            "type": "number",
+            "format": "double"
+          },
+          "minimum-depth": {
+            "type": "number",
+            "format": "double"
+          },
+          "bottom-backstep": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SounderCalculationInterval": {
+        "type": "object",
+        "properties": {
+          "distance-interval-nmi": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "time-interval-seconds": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ping-interval": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "interval-mode": {
+            "enum": [
+              "pings",
+              "time",
+              "distance"
+            ],
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SystemPingMonitoringInfo": {
+        "type": "object",
+        "properties": {
+          "is-monitoring-enabled": {
+            "type": "boolean"
+          },
+          "is-active-pinging": {
+            "type": "boolean"
+          },
+          "is-external-sync-timeout": {
+            "type": "boolean"
+          },
+          "last-ping-delta-ms": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ping-interval-description": {
+            "type": "string",
+            "nullable": true
+          },
+          "subscriptions-info": {
+            "$ref": "#/components/schemas/SystemSubscriptionInfo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SystemSubscriptionInfo": {
+        "type": "object",
+        "properties": {
+          "total-time": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "performance-tips": {
+            "type": "string",
+            "nullable": true
+          },
+          "show-performance-tips": {
+            "type": "boolean"
+          },
+          "ping-groups-subscriptions-info": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PingGroupSubscriptionsInfo"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TransceiverCapabilities": {
+        "type": "object",
+        "properties": {
+          "element-sample-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "serial-number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ip-address": {
+            "type": "string",
+            "nullable": true
+          },
+          "impedance": {
+            "type": "number",
+            "format": "double"
+          },
+          "max-tx-power": {
+            "type": "number",
+            "format": "double"
+          },
+          "transceiver-model": {
+            "type": "string",
+            "nullable": true
+          },
+          "identity": {
+            "type": "string",
+            "nullable": true
+          },
+          "market-segment": {
+            "type": "string",
+            "nullable": true
+          },
+          "available-filters": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "standard-resolution",
+                "short",
+                "high-resolution",
+                "low-resolution",
+                "full-resolution",
+                "hydrophone"
+              ],
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "available-channel-modes": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "active",
+                "passive",
+                "test"
+              ],
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "available-pulse-forms": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "cw",
+                "hfm",
+                "lfm-up",
+                "lfm-down",
+                "user-defined"
+              ],
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TransceiverParameters": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "string",
+            "nullable": true
+          },
+          "transceiver-model": {
+            "type": "string",
+            "nullable": true
+          },
+          "serial-number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "software-version": {
+            "type": "string",
+            "nullable": true
+          },
+          "firmware-version": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "ip-address": {
+            "type": "string",
+            "nullable": true
+          },
+          "mac-address": {
+            "type": "string",
+            "nullable": true
+          },
+          "communication-status": {
+            "enum": [
+              "ok",
+              "lost-contact",
+              "invalid"
+            ],
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Transducer": {
+        "type": "object",
+        "properties": {
+          "transducer-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "sound-velocity": {
+            "type": "number",
+            "format": "float"
+          },
+          "tx-voltage": {
+            "type": "number",
+            "format": "float"
+          },
+          "installation-type": {
+            "enum": [
+              "hull-mounted",
+              "variable-depth",
+              "towed",
+              "subsea"
+            ],
+            "type": "string"
+          },
+          "orientation-type": {
+            "enum": [
+              "vertical",
+              "port",
+              "starboard",
+              "horizontal",
+              "vertical-tilted",
+              "upward-looking"
+            ],
+            "type": "string"
+          },
+          "installation-angles": {
+            "$ref": "#/components/schemas/RotationAngles"
+          },
+          "installation-offset": {
+            "$ref": "#/components/schemas/GeoVector"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TransducerCapabilities": {
+        "type": "object",
+        "properties": {
+          "transducer-custom-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "unique-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "transducer-name": {
+            "type": "string",
+            "nullable": true
+          },
+          "serial-number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "article-number": {
+            "type": "string",
+            "nullable": true
+          },
+          "is-fixed-beam": {
+            "type": "boolean"
+          },
+          "nominal-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "minimum-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "maximum-frequency": {
+            "type": "number",
+            "format": "double"
+          },
+          "max-band-width": {
+            "type": "number",
+            "format": "double"
+          },
+          "nominal-beam-opening": {
+            "$ref": "#/components/schemas/BeamAxes"
+          },
+          "max-tx-power": {
+            "type": "number",
+            "format": "double"
+          },
+          "is-multiplexed": {
+            "type": "boolean"
+          },
+          "transceiver-capabilities": {
+            "$ref": "#/components/schemas/TransceiverCapabilities"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TxAmplitudeData": {
+        "type": "object",
+        "properties": {
+          "auto": {
+            "type": "boolean"
+          },
+          "amplitude": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WaterColumnData": {
+        "type": "object",
+        "properties": {
+          "acidity": {
+            "type": "number",
+            "format": "double"
+          },
+          "depth-for-sv-and-absorption-calculations": {
+            "type": "number",
+            "format": "double"
+          },
+          "latitude-for-pressure-calculations": {
+            "type": "number",
+            "format": "double"
+          },
+          "salinity": {
+            "type": "number",
+            "format": "double"
+          },
+          "water-temperature": {
+            "type": "number",
+            "format": "double"
+          },
+          "water-column-sound-speed-source": {
+            "enum": [
+              "manual",
+              "calculated",
+              "profile",
+              "probe"
+            ],
+            "type": "string"
+          },
+          "water-column-sound-speed": {
+            "type": "number",
+            "format": "double"
+          },
+          "selected-profile": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "diagnostics"
+    }
+  ]
+}

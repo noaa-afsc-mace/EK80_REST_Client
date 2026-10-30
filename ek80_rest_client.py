@@ -39,12 +39,11 @@ http://192.168.56.5:45123/swagger/
 import datetime
 import zmq
 import numpy as np
-import ek80_data_client
-import ek80_param_client
+import ek80dataclient
+import ek80paramclient
 from google.protobuf.json_format import MessageToDict
-import ek80_datagrams_v2360_pb2 as ek80_datagrams_pb2
-#from PyQt5 import QtCore
-from PyQt6 import QtCore
+import ek80_datagrams_v2623_pb2 as ek80_datagrams_pb2
+from PySide6 import QtCore
 
 
 class ek80_rest_client(QtCore.QObject):
@@ -56,8 +55,8 @@ class ek80_rest_client(QtCore.QObject):
     INDEX2POWER = (10.0 * np.log10(2.0) / 256.0)
 
     #  define our signals
-    subscriptionData = QtCore.pyqtSignal(object, str, dict)
-    cleanupComplete = QtCore.pyqtSignal()
+    subscriptionData = QtCore.Signal(object, str, dict)
+    cleanupComplete = QtCore.Signal()
 
 
     def __init__(self, name, server_address='localhost', param_server_port=12345,
@@ -90,13 +89,13 @@ class ek80_rest_client(QtCore.QObject):
         elif self.server_address == 'localhost':
             self.server_address == '127.0.0.1'
 
-        #  create instances of our ek80_data_client and ek80_parameter_clients
-        self.param_client_config = ek80_param_client.Configuration()
+        #  create instances of our ek80dataclient and ek80_parameter_clients
+        self.param_client_config = ek80paramclient.Configuration()
         self.param_client_config.host="http://" + server_address + ":" + str(param_server_port) + "/"
-        self.param_api_client = ek80_param_client.ApiClient(configuration=self.param_client_config)
-        self.data_client_config = ek80_data_client.Configuration()
+        self.param_api_client = ek80paramclient.ApiClient(configuration=self.param_client_config)
+        self.data_client_config = ek80dataclient.Configuration()
         self.data_client_config.host="http://" + server_address + ":" + str(data_server_port) + "/"
-        self.data_api_client = ek80_data_client.ApiClient(configuration=self.data_client_config)
+        self.data_api_client = ek80dataclient.ApiClient(configuration=self.data_client_config)
 
         #  create a timer to poll the zero-mq subscriptions
         self.poll_timer = QtCore.QTimer(self)
@@ -107,7 +106,7 @@ class ek80_rest_client(QtCore.QObject):
         '''
         get_channels returns a list containing the installed echosounder channels
         '''
-        pca = ek80_param_client.PingConfigurationApi(self.param_api_client)
+        pca = ek80paramclient.PingConfigurationApi(self.param_api_client)
         return pca.ping_configuration_get_channels(_request_timeout=self.request_timeout)
 
 
@@ -128,7 +127,7 @@ class ek80_rest_client(QtCore.QObject):
 
         '''
 
-        ea = ek80_param_client.EnvironmentApi(self.param_api_client)
+        ea = ek80paramclient.EnvironmentApi(self.param_api_client)
         return ea.environment_get_water_column_data(_request_timeout=self.request_timeout)
 
 
@@ -141,7 +140,7 @@ class ek80_rest_client(QtCore.QObject):
             transducer_manual_sound_speed               float
         '''
 
-        ea = ek80_param_client.EnvironmentApi(self.param_api_client)
+        ea = ek80paramclient.EnvironmentApi(self.param_api_client)
         return ea.environment_get_transducer_face_data(_request_timeout=self.request_timeout)
 
 
@@ -150,7 +149,7 @@ class ek80_rest_client(QtCore.QObject):
         get_navigation returns the current lat/lon, course, speed, heading, and vessel log
         '''
 
-        osa = ek80_param_client.OwnshipApi(self.param_api_client)
+        osa = ek80paramclient.OwnshipApi(self.param_api_client)
         return osa.ownship_get_navigation(_request_timeout=self.request_timeout)
 
 
@@ -158,7 +157,7 @@ class ek80_rest_client(QtCore.QObject):
         """
         get_motion returns heave, pitch, roll, surge, sway, time, and yaw (heading)
         """
-        osa = ek80_param_client.OwnshipApi(self.param_api_client)
+        osa = ek80paramclient.OwnshipApi(self.param_api_client)
         motion_data = osa.ownship_get_motion(_request_timeout=self.request_timeout)
 
         #convert the ping_time to a datetime
@@ -171,7 +170,7 @@ class ek80_rest_client(QtCore.QObject):
         """
         get_operation_mode returns...
         """
-        sa = ek80_param_client.SystemApi(self.param_api_client)
+        sa = ek80paramclient.SystemApi(self.param_api_client)
         return sa.system_get_operation_mode(_request_timeout=self.request_timeout)
 
 
@@ -179,7 +178,7 @@ class ek80_rest_client(QtCore.QObject):
         '''
         set_operation_mode sets...
         '''
-        sa = ek80_param_client.SystemApi(self.param_api_client)
+        sa = ek80paramclient.SystemApi(self.param_api_client)
         sa.system_put_operation_mode(mode, _request_timeout=self.request_timeout)
 
 
@@ -187,7 +186,7 @@ class ek80_rest_client(QtCore.QObject):
         """
         get_operational_state returns...
         """
-        sa = ek80_param_client.SystemApi(self.param_api_client)
+        sa = ek80paramclient.SystemApi(self.param_api_client)
         return sa.system_get_operational_state(_request_timeout=self.request_timeout)
 
 
@@ -195,7 +194,7 @@ class ek80_rest_client(QtCore.QObject):
         """
         get_ping_interval returns...
         """
-        sa = ek80_param_client.SystemApi(self.param_api_client)
+        sa = ek80paramclient.SystemApi(self.param_api_client)
         return sa.system_get_ping_interval(_request_timeout=self.request_timeout)
 
 
@@ -203,7 +202,7 @@ class ek80_rest_client(QtCore.QObject):
         '''
         set_ping_interval sets...
         '''
-        sa = ek80_param_client.SystemApi(self.param_api_client)
+        sa = ek80paramclient.SystemApi(self.param_api_client)
         sa.system_put_ping_interval(interval, _request_timeout=self.request_timeout)
 
 
@@ -211,7 +210,7 @@ class ek80_rest_client(QtCore.QObject):
         """
         get_ping_mode returns...
         """
-        sa = ek80_param_client.SystemApi(self.param_api_client)
+        sa = ek80paramclient.SystemApi(self.param_api_client)
         return sa.system_get_ping_mode(_request_timeout=self.request_timeout)
 
 
@@ -219,7 +218,7 @@ class ek80_rest_client(QtCore.QObject):
         '''
         set_ping_mode sets...
         '''
-        sa = ek80_param_client.SystemApi(self.param_api_client)
+        sa = ek80paramclient.SystemApi(self.param_api_client)
         sa.system_put_ping_mode(mode, _request_timeout=self.request_timeout)
 
 
@@ -234,7 +233,7 @@ class ek80_rest_client(QtCore.QObject):
         Common, calls to this method return a a default IndividualRangeControl
         object.
         """
-        dsa = ek80_param_client.DataStorageApi(self.param_api_client)
+        dsa = ek80paramclient.DataStorageApi(self.param_api_client)
         return dsa.data_storage_ek80_get_individual_channel_range(channel_id,
                 _request_timeout=self.request_timeout)
 
@@ -244,8 +243,8 @@ class ek80_rest_client(QtCore.QObject):
         set_recording_range sets the recording range for the specified channel.
         You can set auto_range to True to enable automatic recording range.
         '''
-        dsa = ek80_param_client.DataStorageApi(self.param_api_client)
-        channel_range = ek80_param_client.IndividualRangeControl(channel_id=channel_id,
+        dsa = ek80paramclient.DataStorageApi(self.param_api_client)
+        channel_range = ek80paramclient.IndividualRangeControl(channel_id=channel_id,
                 individual_channel_range=range, individual_channel_auto=auto_range)
         dsa.data_storage_ek80_set_individual_channel_range(channel_range,
                 _request_timeout=self.request_timeout)
@@ -272,7 +271,7 @@ class ek80_rest_client(QtCore.QObject):
                 'power-angle-decimated'
 
         """
-        dsa = ek80_param_client.DataStorageApi(self.param_api_client)
+        dsa = ek80paramclient.DataStorageApi(self.param_api_client)
         record_settings = dsa.data_storage_get_basic_storage_settings(_request_timeout=self.request_timeout)
 
         #  as of EK80 23.6.2 the data_storage_get_basic_storage_settings() call always returns
@@ -292,7 +291,7 @@ class ek80_rest_client(QtCore.QObject):
         set_recording_settings sets a number of general data recording
         parameters.
         '''
-        dsa = ek80_param_client.DataStorageApi(self.param_api_client)
+        dsa = ek80paramclient.DataStorageApi(self.param_api_client)
 
         #  while the EK80 REST API docs say that all arguments to MainStorageSettings
         #  are optional, they are not really that optional. If you fail to provide an
@@ -327,7 +326,7 @@ class ek80_rest_client(QtCore.QObject):
             sample_data_format_wbt_cw = current_settings.sample_data_format_wbt_cw
 
         #  create a storage settings object that is fully populated
-        storage_settings = ek80_param_client.MainStorageSettings(file_path=path,
+        storage_settings = ek80paramclient.MainStorageSettings(file_path=path,
                 raw_file_name_prefix=file_prefix,
                 max_file_size=max_file_size,
                 min_free_disk_space=min_free_disk_space,
@@ -345,7 +344,7 @@ class ek80_rest_client(QtCore.QObject):
         get_recording_state returns True if the EK80 software is recording raw
         data to disk and False if it is not.
         '''
-        dsa = ek80_param_client.DataStorageApi(self.param_api_client)
+        dsa = ek80paramclient.DataStorageApi(self.param_api_client)
         return dsa.data_storage_get_record_raw_active(_request_timeout=self.request_timeout)
 
 
@@ -354,7 +353,7 @@ class ek80_rest_client(QtCore.QObject):
         set_recording_state sets the raw data recording state. True enables
         recording and False stops it.
         '''
-        dsa = ek80_param_client.DataStorageApi(self.param_api_client)
+        dsa = ek80paramclient.DataStorageApi(self.param_api_client)
         dsa.data_storage_set_record_raw_active(bool(enabled), _request_timeout=self.request_timeout)
 
 
@@ -363,7 +362,7 @@ class ek80_rest_client(QtCore.QObject):
         get_drop_keel_offset returns the current drop keel setting value and a bool
         indicating the value is manually set.
         '''
-        osa = ek80_param_client.OwnshipApi(self.param_api_client)
+        osa = ek80paramclient.OwnshipApi(self.param_api_client)
         return osa.ownship_get_drop_keel_offset(_request_timeout=self.request_timeout)
 
 
@@ -372,8 +371,8 @@ class ek80_rest_client(QtCore.QObject):
         set_drop_keel_offset sets the current drop keel value and a bool
         indicating the value is manually set.
         '''
-        osa = ek80_param_client.OwnshipApi(self.param_api_client)
-        dropkeel_settings = ek80_param_client.ManualSetting(current_value=new_offset,
+        osa = ek80paramclient.OwnshipApi(self.param_api_client)
+        dropkeel_settings = ek80paramclient.ManualSetting(current_value=new_offset,
                 is_manual=True)
         osa.ownship_set_drop_keel_offset(dropkeel_settings, _request_timeout=self.request_timeout)
 
@@ -382,7 +381,7 @@ class ek80_rest_client(QtCore.QObject):
         '''
         get_ping_configuration returns...
         '''
-        pca = ek80_param_client.PingConfigurationApi(self.param_api_client)
+        pca = ek80paramclient.PingConfigurationApi(self.param_api_client)
         return pca.ping_ek80_configuration_get_ping_configuration(_request_timeout=self.request_timeout)
 
 
@@ -390,7 +389,7 @@ class ek80_rest_client(QtCore.QObject):
         '''
         get_channel_transmit_power returns...
         '''
-        pca = ek80_param_client.PingConfigurationApi(self.param_api_client)
+        pca = ek80paramclient.PingConfigurationApi(self.param_api_client)
         return pca.ping_configuration_get_channel_transmit_power(channel_id,
                 _request_timeout=self.request_timeout)
 
@@ -399,7 +398,7 @@ class ek80_rest_client(QtCore.QObject):
         '''
         get_channel_pulse_settings returns...
         '''
-        pca = ek80_param_client.PingConfigurationApi(self.param_api_client)
+        pca = ek80paramclient.PingConfigurationApi(self.param_api_client)
         return pca.ping_configuration_get_channel_pulse_settings(channel_id,
                 _request_timeout=self.request_timeout)
 
@@ -437,11 +436,11 @@ class ek80_rest_client(QtCore.QObject):
             endpoint_id = self.subscriptions[sub_id]['endpoint_id']
 
         #  remove the subscription from its endpoint
-        api_instance = ek80_data_client.CommunicationEndPointsApi(self.data_api_client)
+        api_instance = ek80dataclient.CommunicationEndPointsApi(self.data_api_client)
         api_instance.remove_subscription_from_end_point(endpoint_id, sub_id)
 
         #  create an instance of the bottom detections subs api
-        api_instance = ek80_data_client.BottomDetectionSubscriptionsApi(self.data_api_client)
+        api_instance = ek80dataclient.BottomDetectionSubscriptionsApi(self.data_api_client)
 
         #  delete the bottom detection subscription
         api_instance.delete_bottom_detection_subscription(sub_id)
@@ -486,7 +485,7 @@ class ek80_rest_client(QtCore.QObject):
                     'Subscription %i is not a bottom detection subscription.' % (sub_id))
 
         #  create an instance of the bottom detections subs api
-        api_instance = ek80_data_client.BottomDetectionSubscriptionsApi(self.data_api_client)
+        api_instance = ek80dataclient.BottomDetectionSubscriptionsApi(self.data_api_client)
 
         #  and use it to update our subscription
         sub_spec = api_instance.get_bottom_detection_subscription(sub_id)
@@ -534,7 +533,7 @@ class ek80_rest_client(QtCore.QObject):
                     '%i is not a bottom detection subscription' % (sub_id))
 
         #  create a bottom detection settings obj
-        sub_settings = ek80_data_client.BottomDetectionSettings()
+        sub_settings = ek80dataclient.BottomDetectionSettings()
 
         #  set the various properties
         sub_settings.upper_detector_limit = upper_detector_limit
@@ -542,7 +541,7 @@ class ek80_rest_client(QtCore.QObject):
         sub_settings.bottom_back_step = bottom_back_step
 
         #  create an instance of the bottom detections subs api
-        api_instance = ek80_data_client.BottomDetectionSubscriptionsApi(self.data_api_client)
+        api_instance = ek80dataclient.BottomDetectionSubscriptionsApi(self.data_api_client)
 
         #  and use it to update our subscription
         api_instance.update_bottom_detection_subscription(sub_id, sub_settings)
@@ -586,11 +585,11 @@ class ek80_rest_client(QtCore.QObject):
             endpoint_id = self.create_server_endpoint()
 
         #  create an instance of the create subscription API
-        api_instance = ek80_data_client.CreateADataSubscriptionApi(self.data_api_client)
+        api_instance = ek80dataclient.CreateADataSubscriptionApi(self.data_api_client)
 
         #  create our settings and spec objects
-        sub_settings = ek80_data_client.BottomDetectionSettings()
-        sub_spec = ek80_data_client.BottomDetectionSubscriptionSpecification()
+        sub_settings = ek80dataclient.BottomDetectionSettings()
+        sub_spec = ek80dataclient.BottomDetectionSubscriptionSpecification()
 
         #  set the various properties
         sub_settings.upper_detector_limit = upper_detector_limit
@@ -610,8 +609,8 @@ class ek80_rest_client(QtCore.QObject):
                 'cleanup':self.delete_bottom_detection_subscription}
 
         #  and connect the subscription to the endpoint
-        subscription_output_args = ek80_data_client.SubscriptionOutputArgs(sub_id, 'proto-buf')
-        api_instance = ek80_data_client.CommunicationEndPointsApi(self.data_api_client)
+        subscription_output_args = ek80dataclient.SubscriptionOutputArgs(sub_id, 'proto-buf')
+        api_instance = ek80dataclient.CommunicationEndPointsApi(self.data_api_client)
         api_instance.add_subscription_to_end_point(endpoint_id, subscription_output_args)
         self.endpoints[endpoint_id]['subscriptions'].append(sub_id)
 
@@ -721,7 +720,7 @@ class ek80_rest_client(QtCore.QObject):
                     print('You must add this type to the poll_zmq_messages() method of the EK80 client.')
 
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def cleanup_client(self, quiet=False):
         '''
         cleanup_client should be called when you're done using the client
@@ -793,7 +792,7 @@ class ek80_rest_client(QtCore.QObject):
             self.poll_timer.stop()
 
         #  create an instance of the CommunicationEndPoints API
-        api_instance = ek80_data_client.CommunicationEndPointsApi(self.data_api_client)
+        api_instance = ek80dataclient.CommunicationEndPointsApi(self.data_api_client)
 
         #  get a list of all active endpoints
         endpoints = api_instance.get_active_communication_end_points()
@@ -856,7 +855,7 @@ class ek80_rest_client(QtCore.QObject):
             raise ValueError('%i is not a valid endpoint id' % (endpoint_id))
 
         #  create an instance of the CommunicationEndPoints API
-        api_instance = ek80_data_client.CommunicationEndPointsApi(self.data_api_client)
+        api_instance = ek80dataclient.CommunicationEndPointsApi(self.data_api_client)
 
         #  and delete the endpoint
         api_instance.delete_communication_end_point(endpoint_id)
@@ -886,7 +885,7 @@ class ek80_rest_client(QtCore.QObject):
             name = self.name + '-' + str(self.next_server_port)
 
         #  create an instance of the CommunicationEndPoints API
-        api_instance = ek80_data_client.CommunicationEndPointsApi(self.data_api_client)
+        api_instance = ek80dataclient.CommunicationEndPointsApi(self.data_api_client)
 
         #  craft the endpoint address string
         endpoint = 'tcp://' + self.server_address + ':' + str(self.next_server_port)
@@ -894,7 +893,7 @@ class ek80_rest_client(QtCore.QObject):
         #  create an instance of the end point settings object. This client always
         #  uses the zero-mq messaging system which as of 21.15 is the only system
         #  that is implemented.
-        com_settings = ek80_data_client.CommunicationEndPointSettings(name, endpoint, 'zero-mq')
+        com_settings = ek80dataclient.CommunicationEndPointSettings(name, endpoint, 'zero-mq')
 
         #  create the endpoint - this returns the endpoint ID
         endpoint_id = api_instance.create_communication_end_point(com_settings)
@@ -973,7 +972,7 @@ class ek80_rest_client(QtCore.QObject):
             endpoint_id = self.subscriptions[sub_id]['endpoint_id']
 
         #  remove the subscription from its endpoint
-        api_instance = ek80_data_client.CommunicationEndPointsApi(self.data_api_client)
+        api_instance = ek80dataclient.CommunicationEndPointsApi(self.data_api_client)
 
         try:
             api_instance.remove_subscription_from_end_point(endpoint_id, sub_id)
@@ -981,7 +980,7 @@ class ek80_rest_client(QtCore.QObject):
             pass
 
         #  create an instance of the echogram subs api
-        api_instance = ek80_data_client.EchogramSubscriptionsApi(self.data_api_client)
+        api_instance = ek80dataclient.EchogramSubscriptionsApi(self.data_api_client)
 
         #  delete the echogram subscription
         try:
@@ -1042,7 +1041,7 @@ class ek80_rest_client(QtCore.QObject):
                     'Subscription %i is not an echogram subscription.' % (sub_id))
 
         #  create an instance of the echogram sub api
-        api_instance = ek80_data_client.EchogramSubscriptionsApi(self.data_api_client)
+        api_instance = ek80dataclient.EchogramSubscriptionsApi(self.data_api_client)
 
         #  and use it to get our subscription info
         sub_spec = api_instance.get_echogram_subscription(sub_id)
@@ -1134,7 +1133,7 @@ class ek80_rest_client(QtCore.QObject):
                     '%i is not an echogram subscription' % (sub_id))
 
         #  create a settings object
-        sub_settings = ek80_data_client.EchogramSettings()
+        sub_settings = ek80dataclient.EchogramSettings()
 
         #  set the various subscription settings
         sub_settings.pixel_count = pixel_count
@@ -1157,7 +1156,7 @@ class ek80_rest_client(QtCore.QObject):
         sub_settings.echogram_bottom_margin = echogram_bottom_margin
 
         #  create an instance of the echogram subs api
-        api_instance = ek80_data_client.EchogramSubscriptionsApi(self.data_api_client)
+        api_instance = ek80dataclient.EchogramSubscriptionsApi(self.data_api_client)
 
         #  and use it to update our subscription
         api_instance.update_echogram_subscription(sub_id, sub_settings)
@@ -1233,10 +1232,10 @@ class ek80_rest_client(QtCore.QObject):
             endpoint_id = self.create_server_endpoint()
 
         #  create an instance of the create subscription API
-        api_instance = ek80_data_client.CreateADataSubscriptionApi(self.data_api_client)
+        api_instance = ek80dataclient.CreateADataSubscriptionApi(self.data_api_client)
 
         #  create our settings and spec objects
-        sub_settings = ek80_data_client.EchogramSettings()
+        sub_settings = ek80dataclient.EchogramSettings()
 
         #  set the various subscription settings
         sub_settings.pixel_count = pixel_count
@@ -1260,7 +1259,7 @@ class ek80_rest_client(QtCore.QObject):
 
         #  the echogram sub spec requires that the optional init args be specified.
         #  This is different from the bottom subscription. ?
-        sub_spec = ek80_data_client.EchogramSubscriptionSpecification(
+        sub_spec = ek80dataclient.EchogramSubscriptionSpecification(
                 channel_id=channel_id, settings=sub_settings,
                 subscription_name=name, subscriber_name=self.name)
 
@@ -1274,8 +1273,8 @@ class ek80_rest_client(QtCore.QObject):
                 'return_db_format':ek500_db_format}
 
         #  and connect the subscription to the endpoint
-        subscription_output_args = ek80_data_client.SubscriptionOutputArgs(sub_id, 'proto-buf')
-        api_instance = ek80_data_client.CommunicationEndPointsApi(self.data_api_client)
+        subscription_output_args = ek80dataclient.SubscriptionOutputArgs(sub_id, 'proto-buf')
+        api_instance = ek80dataclient.CommunicationEndPointsApi(self.data_api_client)
         api_instance.add_subscription_to_end_point(endpoint_id, subscription_output_args)
         self.endpoints[endpoint_id]['subscriptions'].append(sub_id)
 

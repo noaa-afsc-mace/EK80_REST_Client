@@ -3,14 +3,14 @@
 
 """
 
-from PyQt6 import QtCore
+from PySide6 import QtCore
 import ek80_rest_client
 
 
 class basic_example(QtCore.QObject):
 
-    stopClient = QtCore.pyqtSignal()
-    stopApp = QtCore.pyqtSignal()
+    stopClient = QtCore.Signal()
+    stopApp = QtCore.Signal()
 
     def __init__(self, server_address, client_name, end_point_port, parent=None):
         #  initialize the superclass
@@ -73,7 +73,7 @@ class basic_example(QtCore.QObject):
         self.stopClient.emit()
 
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def clientStopped(self):
 
         print("Client cleanup complete.")
@@ -82,7 +82,7 @@ class basic_example(QtCore.QObject):
         return
 
 
-    @QtCore.pyqtSlot(object, str, dict)
+    @QtCore.Slot(object, str, dict)
     def subscriptionDataAvailable(self, clientObj, data_type, data):
 
         if data_type == 'bottom detection':

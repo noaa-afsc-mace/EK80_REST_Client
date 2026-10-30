@@ -1,0 +1,238 @@
+# ek80dataclient.TargetsIntegrationSubscriptionsApi
+
+All URIs are relative to */*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**api_sounder_data_output_targets_integration_subscriptions_get**](TargetsIntegrationSubscriptionsApi.md#api_sounder_data_output_targets_integration_subscriptions_get) | **GET** /api/sounder/data-output/targets-integration-subscriptions | GetTargetsIntegrationSubscriptions
+[**api_sounder_data_output_targets_integration_subscriptions_post**](TargetsIntegrationSubscriptionsApi.md#api_sounder_data_output_targets_integration_subscriptions_post) | **POST** /api/sounder/data-output/targets-integration-subscriptions | CreateTargetsIntegrationSubscription
+[**api_sounder_data_output_targets_integration_subscriptions_subscription_id_delete**](TargetsIntegrationSubscriptionsApi.md#api_sounder_data_output_targets_integration_subscriptions_subscription_id_delete) | **DELETE** /api/sounder/data-output/targets-integration-subscriptions/{subscriptionId} | DeleteTargetsIntegrationSubscription
+[**api_sounder_data_output_targets_integration_subscriptions_subscription_id_get**](TargetsIntegrationSubscriptionsApi.md#api_sounder_data_output_targets_integration_subscriptions_subscription_id_get) | **GET** /api/sounder/data-output/targets-integration-subscriptions/{subscriptionId} | GetTargetsIntegrationSubscription
+[**api_sounder_data_output_targets_integration_subscriptions_subscription_id_put**](TargetsIntegrationSubscriptionsApi.md#api_sounder_data_output_targets_integration_subscriptions_subscription_id_put) | **PUT** /api/sounder/data-output/targets-integration-subscriptions/{subscriptionId} | UpdateTargetsIntegrationSubscription
+
+# **api_sounder_data_output_targets_integration_subscriptions_get**
+> list[TargetsIntegrationSubscriptionInfo] api_sounder_data_output_targets_integration_subscriptions_get()
+
+GetTargetsIntegrationSubscriptions
+
+### Example
+```python
+from __future__ import print_function
+import time
+import ek80dataclient
+from ek80dataclient.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = ek80dataclient.TargetsIntegrationSubscriptionsApi()
+
+try:
+    # GetTargetsIntegrationSubscriptions
+    api_response = api_instance.api_sounder_data_output_targets_integration_subscriptions_get()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TargetsIntegrationSubscriptionsApi->api_sounder_data_output_targets_integration_subscriptions_get: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**list[TargetsIntegrationSubscriptionInfo]**](TargetsIntegrationSubscriptionInfo.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **api_sounder_data_output_targets_integration_subscriptions_post**
+> int api_sounder_data_output_targets_integration_subscriptions_post(body=body)
+
+CreateTargetsIntegrationSubscription
+
+### Example
+```python
+from __future__ import print_function
+import time
+import ek80dataclient
+from ek80dataclient.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = ek80dataclient.TargetsIntegrationSubscriptionsApi()
+body = ek80dataclient.TargetsIntegrationSubscriptionSpecification() # TargetsIntegrationSubscriptionSpecification |  (optional)
+
+try:
+    # CreateTargetsIntegrationSubscription
+    api_response = api_instance.api_sounder_data_output_targets_integration_subscriptions_post(body=body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TargetsIntegrationSubscriptionsApi->api_sounder_data_output_targets_integration_subscriptions_post: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**TargetsIntegrationSubscriptionSpecification**](TargetsIntegrationSubscriptionSpecification.md)|  | [optional] 
+
+### Return type
+
+**int**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **api_sounder_data_output_targets_integration_subscriptions_subscription_id_delete**
+> api_sounder_data_output_targets_integration_subscriptions_subscription_id_delete(subscription_id)
+
+DeleteTargetsIntegrationSubscription
+
+### Example
+```python
+from __future__ import print_function
+import time
+import ek80dataclient
+from ek80dataclient.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = ek80dataclient.TargetsIntegrationSubscriptionsApi()
+subscription_id = 789 # int | 
+
+try:
+    # DeleteTargetsIntegrationSubscription
+    api_instance.api_sounder_data_output_targets_integration_subscriptions_subscription_id_delete(subscription_id)
+except ApiException as e:
+    print("Exception when calling TargetsIntegrationSubscriptionsApi->api_sounder_data_output_targets_integration_subscriptions_subscription_id_delete: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subscription_id** | **int**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **api_sounder_data_output_targets_integration_subscriptions_subscription_id_get**
+> TargetsIntegrationSubscriptionSpecification api_sounder_data_output_targets_integration_subscriptions_subscription_id_get(subscription_id)
+
+GetTargetsIntegrationSubscription
+
+### Example
+```python
+from __future__ import print_function
+import time
+import ek80dataclient
+from ek80dataclient.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = ek80dataclient.TargetsIntegrationSubscriptionsApi()
+subscription_id = 789 # int | 
+
+try:
+    # GetTargetsIntegrationSubscription
+    api_response = api_instance.api_sounder_data_output_targets_integration_subscriptions_subscription_id_get(subscription_id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling TargetsIntegrationSubscriptionsApi->api_sounder_data_output_targets_integration_subscriptions_subscription_id_get: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subscription_id** | **int**|  | 
+
+### Return type
+
+[**TargetsIntegrationSubscriptionSpecification**](TargetsIntegrationSubscriptionSpecification.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **api_sounder_data_output_targets_integration_subscriptions_subscription_id_put**
+> api_sounder_data_output_targets_integration_subscriptions_subscription_id_put(subscription_id, body=body)
+
+UpdateTargetsIntegrationSubscription
+
+### Example
+```python
+from __future__ import print_function
+import time
+import ek80dataclient
+from ek80dataclient.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = ek80dataclient.TargetsIntegrationSubscriptionsApi()
+subscription_id = 789 # int | 
+body = ek80dataclient.TargetsIntegrationSettings() # TargetsIntegrationSettings |  (optional)
+
+try:
+    # UpdateTargetsIntegrationSubscription
+    api_instance.api_sounder_data_output_targets_integration_subscriptions_subscription_id_put(subscription_id, body=body)
+except ApiException as e:
+    print("Exception when calling TargetsIntegrationSubscriptionsApi->api_sounder_data_output_targets_integration_subscriptions_subscription_id_put: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subscription_id** | **int**|  | 
+ **body** | [**TargetsIntegrationSettings**](TargetsIntegrationSettings.md)|  | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

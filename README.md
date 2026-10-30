@@ -3,7 +3,7 @@
 
 Release 21.15 of the EK80 scientific echosounder application introduced a new REST-ful API for application control and data subscription. The API is described using the swagger/OpenAPI spec allowing clients to be auto-generated using swagger-codegen. This project aims to wrap the "data" and "parameter" thin clients into a single, er, thicker, client for general purpose command and control of EK80 systems using Python.
 
-The client is in the very early stages of development but does currently support bottom detection subscriptions. The intent is to add subscription types and methods for getting/setting operational parameters as needed.
+This version of the client supports EK80 v26.2.3
 
 ## Example
 Check out basic_example.py for an example of how to use the client in an application.
@@ -24,7 +24,7 @@ Application exiting...
 ## Python Dependencies
 
 * Python > 3.5
-* PyQt5
+* PySide6
 * certifi >= 2017.4.17
 * python-dateutil >= 2.1
 * urllib3 >= 1.23
@@ -32,17 +32,17 @@ Application exiting...
 * [pyzmq](https://pypi.org/project/pyzmq/)
 * [protobuf](https://pypi.org/project/protobuf/)
 
-You must also install the ek80_data_client and ek80_param_client packages that are part of this package.
+You must also install the ek80dataclient and ek80paramclient packages that are part of this package.
 
 ```plaintext
-C:\Users\hank.scorpio\Work\AFSCGit\EK80_REST_Client>cd ek80_data_client
-C:\Users\hank.scorpio\Work\AFSCGit\EK80_REST_Client\ek80_data_client>ls -l
+C:\Users\hank.scorpio\Work\AFSCGit\EK80_REST_Client>cd ek80dataclient
+C:\Users\hank.scorpio\Work\AFSCGit\EK80_REST_Client\ek80dataclient>ls -l
 total 139
 -rw-r--r-- 1 hank.scorpio globex 39590 Mar  2 08:56 README.md
 drwxr-xr-x 1 hank.scorpio globex     0 Mar  2 10:51 build
 drwxr-xr-x 1 hank.scorpio globex     0 Mar  2 08:56 docs
-drwxr-xr-x 1 hank.scorpio globex     0 Mar  2 08:56 ek80_data_client
-drwxr-xr-x 1 hank.scorpio globex     0 Mar  2 10:51 ek80_data_client.egg-info
+drwxr-xr-x 1 hank.scorpio globex     0 Mar  2 08:56 ek80dataclient
+drwxr-xr-x 1 hank.scorpio globex     0 Mar  2 10:51 ek80dataclient.egg-info
 -rwxr-xr-x 1 hank.scorpio globex  1663 Mar  2 08:56 git_push.sh
 -rw-r--r-- 1 hank.scorpio globex    96 Mar  2 08:56 requirements.txt
 -rw-r--r-- 1 hank.scorpio globex  1640 Mar  2 08:56 setup.py
@@ -50,18 +50,18 @@ drwxr-xr-x 1 hank.scorpio globex     0 Mar  2 08:56 test
 -rw-r--r-- 1 hank.scorpio globex    69 Mar  2 08:56 test-requirements.txt
 -rw-r--r-- 1 hank.scorpio globex   149 Mar  2 08:56 tox.ini
 
-C:\Users\hank.scorpio\Work\AFSCGit\EK80_REST_Client\ek80_data_client>pip install .
-Processing c:\users\hank.scorpio\work\afscgit\ek80_rest_client\ek80_data_client
+C:\Users\hank.scorpio\Work\AFSCGit\EK80_REST_Client\ek80dataclient>pip install .
+Processing c:\users\hank.scorpio\work\afscgit\ek80_rest_client\ek80dataclient
   Preparing metadata (setup.py) ... done
-Requirement already satisfied: certifi>=2017.4.17 in c:\wpy64-3890\python-3.8.9.amd64\lib\site-packages (from ek80-data-client==0.1.0) (2020.12.5)
-Requirement already satisfied: python-dateutil>=2.1 in c:\wpy64-3890\python-3.8.9.amd64\lib\site-packages (from ek80-data-client==0.1.0) (2.8.1)
-Requirement already satisfied: six>=1.10 in c:\wpy64-3890\python-3.8.9.amd64\lib\site-packages (from ek80-data-client==0.1.0) (1.15.0)
-Requirement already satisfied: urllib3>=1.23 in c:\wpy64-3890\python-3.8.9.amd64\lib\site-packages (from ek80-data-client==0.1.0) (1.26.4)
-Building wheels for collected packages: ek80-data-client
-  Building wheel for ek80-data-client (setup.py) ... done
-  Created wheel for ek80-data-client: filename=ek80_data_client-0.1.0-py3-none-any.whl size=257946 sha256=5ff9183007a2995cc4f3c2eb3ba7ba816040fcad69953579f8c76f738b622036
+Requirement already satisfied: certifi>=2017.4.17 in c:\wpy64-3890\python-3.8.9.amd64\lib\site-packages (from ek80dataclient==0.1.0) (2020.12.5)
+Requirement already satisfied: python-dateutil>=2.1 in c:\wpy64-3890\python-3.8.9.amd64\lib\site-packages (from ek80dataclient==0.1.0) (2.8.1)
+Requirement already satisfied: six>=1.10 in c:\wpy64-3890\python-3.8.9.amd64\lib\site-packages (from ek80dataclient==0.1.0) (1.15.0)
+Requirement already satisfied: urllib3>=1.23 in c:\wpy64-3890\python-3.8.9.amd64\lib\site-packages (from ek80dataclient==0.1.0) (1.26.4)
+Building wheels for collected packages: ek80dataclient
+  Building wheel for ek80dataclient (setup.py) ... done
+  Created wheel for ek80dataclient: filename=ek80dataclient-0.1.0-py3-none-any.whl size=257946 sha256=5ff9183007a2995cc4f3c2eb3ba7ba816040fcad69953579f8c76f738b622036
   Stored in directory: C:\Users\hank.scorpio\AppData\Local\Temp\pip-ephem-wheel-cache-ngt4rhqf\wheels\85\c8\5c\2a0639f04a6d4ac7541d074ab6dab5a40d739015fd10a391d9
-Successfully built ek80-data-client
-Installing collected packages: ek80-data-client
-Successfully installed ek80-data-client-0.1.0
+Successfully built ek80dataclient
+Installing collected packages: ek80dataclient
+Successfully installed ek80dataclient-0.1.0
 ```

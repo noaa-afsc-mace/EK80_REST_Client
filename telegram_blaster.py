@@ -21,15 +21,15 @@ import logging
 import collections
 import yaml
 import urllib3
-from PyQt5 import QtCore, QtNetwork
+from PySide6 import QtCore, QtNetwork
 import ek80_rest_client
 
 
 class telegram_blaster(QtCore.QObject):
 
     #  define the blaster's signals
-    stopClient = QtCore.pyqtSignal()
-    stopApp = QtCore.pyqtSignal()
+    stopClient = QtCore.Signal()
+    stopApp = QtCore.Signal()
 
     #  specify the delay, in seconds, between when the application connects
     #  and when it tries to create subscriptions. If telegram_blaster is
@@ -255,7 +255,7 @@ class telegram_blaster(QtCore.QObject):
             self.logger.error("No channels found! What are we doing here???")
 
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def poll_parameters(self):
         '''
         poll_parameters is called by a timer to poll the server for data
@@ -315,7 +315,7 @@ class telegram_blaster(QtCore.QObject):
             self.reestablish_connection()
 
 
-    @QtCore.pyqtSlot()
+    @QtCore.Slot()
     def reestablish_connection(self):
         '''
         reestablish_connection is called by the retry_timer to periodically
@@ -444,7 +444,7 @@ class telegram_blaster(QtCore.QObject):
         return gl_bytes
 
 
-    @QtCore.pyqtSlot(object, str, dict)
+    @QtCore.Slot(object, str, dict)
     def subscription_data_available(self, clientObj, data_type, data):
 
         if data_type == 'bottom detection':
